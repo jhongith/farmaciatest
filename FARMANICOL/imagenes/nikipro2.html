@@ -1,0 +1,4196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Farmacia Virgen de los Remedios Cuevo - Sistema Profesional</title>
+  <meta name="description" content="Farmacia Virgen de los Remedios en Cuevo - Sistema de gestión profesional completo"/>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Efectos de cristal mejorados */
+    .glass {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-premium {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      box-shadow: 0 25px 50px rgba(34, 197, 94, 0.1);
+    }
+
+    /* Navegación mejorada */
+    .navbar-glass {
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(40px);
+      transition: all 0.3s cubic-bezier(0.4, 0.3, 0.2, 1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hero section profesional */
+    .hero-bg {
+      background: 
+        linear-gradient(135deg, rgba(34, 197, 94, 0.9) 0%, rgba(21, 128, 61, 0.8) 50%, rgba(16, 185, 129, 0.9) 100%),
+        radial-gradient(circle at 30% 20%, rgba(34, 197, 94, 0.3), transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(16, 185, 129, 0.3), transparent 50%);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    /* Carrusel de banners */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      flex-shrink: 0;
+      width: 100%;
+    }
+
+    /* Tarjetas de productos mejoradas */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.4, 0.3, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+	
+	.product-card:hover {
+	transform: translateY(-12px) scale(1.03);
+	box-shadow: 0 30px 80px -12px rgba(34, 197, 94, 0.4);
+	border-color: rgba(34, 197, 94, 0.4);
+	}
+	
+	/* productos car hover efectos de resplandor jhon */
+	.product-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+	transition: left 0.6s;
+	}
+	
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .product-card:hover::before {
+      left: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 30px 80px -12px rgba(34, 197, 94, 0.4);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    /* Indicadores de administración mejorados */
+    .admin-indicator {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 100;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+      animation: adminPulse 3s infinite;
+    }
+
+    @keyframes adminPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+
+    .pos-indicator {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      animation: posPulse 2s infinite;
+    }
+
+    @keyframes posPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); }
+      50% { opacity: 0.9; box-shadow: 0 12px 35px rgba(59, 130, 246, 0.7); }
+    }
+
+    /* Botones profesionales */
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0.3, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(34, 197, 94, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0.3, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-admin {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s cubic-bezier(0.4, 0.3, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-admin:hover {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+    }
+
+    .btn-pos {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-pos:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    }
+
+    /* Spinner mejorado */
+    .spinner {
+      animation: spin 1s linear infinite;
+      border: 3px solid rgba(34, 197, 94, 0.3);
+      border-top: 3px solid #22c55e;
+      border-radius: 50%;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Carrito animado mejorado */
+    .cart-bounce {
+      animation: cartBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes cartBounce {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1.3); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 24px;
+      width: 24px;
+      font-size: 11px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      border: 2px solid #22c55e;
+      border-radius: 9999px;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      animation: heartbeat 1.5s infinite ease-in-out, ringPulse 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.2); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+
+    @keyframes ringPulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Formularios mejorados */
+    .form-input {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 16px 20px;
+      color: white;
+      font-size: 15px;
+      transition: all 0.3s cubic-bezier(0.4, 0.3, 0.2, 1);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+      background: rgba(30, 41, 59, 1);
+    }
+
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Estados de pedidos mejorados */
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-pendiente {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+
+    .status-confirmado {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .status-completado {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(29, 78, 216, 0.2) 100%);
+      color: #3b82f6;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    .status-pos {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+
+    /* Categorías mejoradas */
+    .category-card {
+      transition: all 0.4s cubic-bezier(0.4, 0.3, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(34, 197, 94, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .category-card:hover::before {
+      opacity: 1;
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    /* Efectos de resplandor */
+    .glow-green {
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .glow-blue {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .glow-yellow {
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    /* Tablas profesionales */
+    .table-professional {
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .table-professional thead {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    }
+
+    .table-professional th {
+      padding: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+      border-bottom: 2px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .table-professional td {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-professional tbody tr:hover {
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    /* Notas de venta profesionales */
+    .invoice-container {
+      background: white;
+      color: black;
+      font-family: 'Inter', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #22c55e;
+    }
+
+    .invoice-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 5px;
+    }
+
+    .invoice-number {
+      font-size: 16px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .invoice-table th {
+      background: #f8fafc;
+      padding: 12px;
+      font-weight: 600;
+      text-align: left;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .invoice-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .invoice-total {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Responsive mejorado */
+    @media (max-width: 768px) {
+      .admin-indicator, .pos-indicator {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px auto;
+        display: block;
+        width: fit-content;
+      }
+
+      .hero-bg {
+        padding: 60px 0;
+      }
+
+      .glass-card {
+        margin: 10px;
+        padding: 20px;
+      }
+
+      .btn-primary, .btn-secondary {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* Modo oscuro mejorado para impresión */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      
+      .glass, .glass-card, .navbar-glass {
+        background: white !important;
+        border: 1px solid #e5e7eb !important;
+        box-shadow: none !important;
+      }
+      
+      .admin-indicator, .navbar-glass {
+        display: none !important;
+      }
+    }
+
+    /* Animaciones de entrada */
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide-in-right {
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Estados de carga mejorados */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading-content {
+      text-align: center;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Mejoras de accesibilidad */
+    .focus-visible:focus {
+      outline: 2px solid #22c55e;
+      outline-offset: 2px;
+    }
+
+    /* Tooltips mejorados */
+    .tooltip {
+      position: relative;
+    }
+
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script type="text/babel" data-presets="env,react">
+    const { useState, useEffect, useMemo, useRef, useCallback, createContext, useContext } = React;
+
+    // ==================== CONSTANTES Y CONFIGURACIÓN ====================
+    const CONSTANTS = {
+      PHONE_WHATSAPP: '59171317450',
+      ADMIN_CREDENTIALS: { username: 'niki', password: '1234' },
+      LOW_STOCK_THRESHOLD: 10,
+      CRITICAL_STOCK_THRESHOLD: 5,
+      ORDER_STATUSES: {
+        PENDIENTE: 'pendiente',
+        CONFIRMADO: 'confirmado',
+        COMPLETADO: 'completado',
+        POS: 'pos'
+      },
+      PAYMENT_METHODS: {
+        EFECTIVO: 'efectivo',
+        TARJETA: 'tarjeta',
+        QR: 'qr',
+        TRANSFERENCIA: 'transferencia'
+      },
+      BUSINESS_INFO: {
+        name: 'Farmacia Virgen de los Remedios',
+        address: 'Cuevo, Santa Cruz - Bolivia',
+        phone: '59171317450',
+        email: 'info@farmaciavdr.com',
+        nit: '1234567890',
+        license: 'DIGEMID-12345'
+      },
+      CATEGORIES: [
+        { value: 'all', label: 'Todas' },
+        { value: 'farmacia', label: 'Farmacia', icon: 'pills', subcategories: [
+          { value: 'problemas_digestivos', label: 'Problemas Digestivos' },
+          { value: 'material_curacion', label: 'Material de Curación' },
+          { value: 'productos_covid', label: 'Productos Covid' },
+          { value: 'problemas_respiratorios', label: 'Problemas Respiratorios y Gripe' },
+          { value: 'vitaminas_suplementos', label: 'Vitaminas y Suplementos' },
+          { value: 'fitoterapia', label: 'Fitoterapia' },
+          { value: 'alivio_dolor', label: 'Alivio del Dolor' },
+          { value: 'vida_sexual', label: 'Vida Sexual' },
+          { value: 'otros_farmacia', label: 'Otros' },
+          { value: 'problemas_oftalmicos', label: 'Problemas Oftálmicos y Óticos' },
+          { value: 'equipos_medicion', label: 'Equipos de Medición y Ortopedia' },
+          { value: 'antihistaminicos', label: 'Antialérgicos' },
+        ]},
+        { value: 'cosmetica', label: 'Cosmética y Belleza', icon: 'spa', subcategories: []},
+        { value: 'mama_bebe', label: 'Mamá y Bebé', icon: 'baby-carriage', subcategories: [
+          { value: 'formulas_leches', label: 'Fórmulas y Leches de Crecimiento' },
+          { value: 'panales_toallas', label: 'Pañales y Toallas húmedas' },
+          { value: 'alimentos_bebes', label: 'Alimentos para bebés' },
+          { value: 'cuidados_bebe', label: 'Cuidados del bebé' },
+          { value: 'juguetes_bebes', label: 'Juguetes para bebés' },
+          { value: 'maternidad', label: 'Maternidad' },
+          { value: 'accesorios_bebes', label: 'Accesorios para bebés' },
+          { value: 'vitaminas_infantiles', label: 'Vitaminas y Suplementos infantiles' }
+        ]},
+        { value: 'cuidado_personal', label: 'Cuidado Personal', icon: 'hand-sparkles', subcategories: [
+          { value: 'desodorantes', label: 'Desodorantes' },
+          { value: 'higiene_bucal', label: 'Higiene Bucal' },
+          { value: 'cuidado_capilar', label: 'Cuidado Capilar' },
+          { value: 'cuidado_pies', label: 'Cuidado de Pies' },
+          { value: 'afeitado_depilacion', label: 'Afeitado y Depilación' },
+          { value: 'cuidado_femenino', label: 'Cuidado Femenino' },
+          { value: 'jabones', label: 'Jabones' },
+          { value: 'sanitizadores', label: 'Sanitizadores' },
+          { value: 'repelentes', label: 'Repelentes' },
+          { value: 'panales_adulto', label: 'Pañales para Adulto y otros' },
+          { value: 'hidratantes_invierno', label: 'Hidratantes para invierno' },
+          { value: 'promociones_cicatricure', label: 'Promociones Cicatricure' }
+        ]},
+        { value: 'hogar', label: 'Hogar', icon: 'house-medical', subcategories: []}
+      ]
+    };
+
+    // ==================== UTILIDADES MEJORADAS ====================
+    const Utils = {
+      formatCurrency: (amount) => {
+        return new Intl.NumberFormat('es-BO', {
+          style: 'currency',
+          currency: 'BOB',
+          minimumFractionDigits: 2
+        }).format(Number(amount || 0));
+      },
+      
+      formatDate: (date, includeTime = true) => {
+        const options = {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        };
+        
+        if (includeTime) {
+          options.hour = '2-digit';
+          options.minute = '2-digit';
+        }
+        
+        return new Date(date).toLocaleDateString('es-ES', options);
+      },
+      
+      formatFullDate: (date) => {
+        return new Date(date).toLocaleDateString('es-ES', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      },
+      
+      generateId: () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      
+      generateInvoiceNumber: () => {
+        const date = new Date();
+        const year = date.getFullYear().toString().substr(-2);
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const random = Math.floor(Math.random() * 9999).toString().padStart(4, '0');
+        return `${year}${month}${day}-${random}`;
+      },
+      
+      storage: {
+        set: (key, value) => {
+          try {
+            localStorage.setItem(key, JSON.stringify(value));
+          } catch (error) {
+            console.error('Storage error:', error);
+          }
+        },
+        get: (key) => {
+          try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : null;
+          } catch (error) {
+            console.error('Storage error:', error);
+            return null;
+          }
+        }
+      },
+      
+      validateCI: (ci) => {
+        return ci && ci.length >= 7 && /^\d+$/.test(ci);
+      },
+      
+      validatePhone: (phone) => {
+        return phone && phone.length >= 8 && /^\d+$/.test(phone);
+      },
+      
+      validateEmail: (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      },
+      
+      sanitizeText: (text) => {
+        return text.replace(/[<>]/g, '');
+      },
+      
+      debounce: (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+    };
+
+    // ==================== CONTEXT Y HOOKS MEJORADOS ====================
+    const AppContext = createContext();
+
+    const useToast = () => {
+      const [toasts, setToasts] = useState([]);
+      
+      const addToast = useCallback((message, type = 'success', duration = 4000) => {
+        const id = Utils.generateId();
+        const toast = { id, message, type, duration };
+        setToasts(prev => [...prev, toast]);
+        
+        setTimeout(() => {
+          setToasts(prev => prev.filter(t => t.id !== id));
+        }, duration);
+      }, []);
+      
+      const removeToast = useCallback((id) => {
+        setToasts(prev => prev.filter(t => t.id !== id));
+      }, []);
+      
+      return { toasts, addToast, removeToast };
+    };
+
+    const useLocalStorage = (key, initialValue) => {
+      const [storedValue, setStoredValue] = useState(() => {
+        try {
+          const item = window.localStorage.getItem(key);
+          return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+          console.error(`Error reading localStorage key "${key}":`, error);
+          return initialValue;
+        }
+      });
+
+      const setValue = useCallback((value) => {
+        try {
+          const valueToStore = value instanceof Function ? value(storedValue) : value;
+          setStoredValue(valueToStore);
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        } catch (error) {
+          console.error(`Error setting localStorage key "${key}":`, error);
+        }
+      }, [key, storedValue]);
+
+      return [storedValue, setValue];
+    };
+
+    // ==================== COMPONENTES UI BÁSICOS ====================
+    const LoadingSpinner = ({ size = 'md', color = 'green' }) => {
+      const sizeClasses = {
+        sm: 'w-6 h-6',
+        md: 'w-10 h-10',
+        lg: 'w-16 h-16',
+        xl: 'w-24 h-24'
+      };
+      
+      const colorClasses = {
+        green: 'border-green-500',
+        blue: 'border-blue-500',
+        yellow: 'border-yellow-500',
+        red: 'border-red-500'
+      };
+      
+      return (
+        <div className="flex justify-center items-center">
+          <div className={`spinner ${sizeClasses[size]} ${colorClasses[color]}`}></div>
+        </div>
+      );
+    };
+
+    const Toast = ({ toast, onRemove }) => {
+      const [isVisible, setIsVisible] = useState(true);
+      
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          setIsVisible(false);
+          setTimeout(() => onRemove(toast.id), 300);
+        }, toast.duration);
+        return () => clearTimeout(timer);
+      }, [toast, onRemove]);
+
+      const typeStyles = {
+        success: 'bg-gradient-to-r from-green-500 to-emerald-500',
+        error: 'bg-gradient-to-r from-red-500 to-rose-500',
+        warning: 'bg-gradient-to-r from-yellow-500 to-amber-500',
+        info: 'bg-gradient-to-r from-blue-500 to-indigo-500'
+      };
+
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+      };
+
+      return (
+        <div className={`
+          ${typeStyles[toast.type]} text-white p-4 rounded-xl shadow-2xl mb-3
+          transition-all duration-300 transform backdrop-blur-sm
+          ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+        `}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <i className={`fas ${icons[toast.type]} mr-3 text-lg`}></i>
+              <span className="font-medium">{toast.message}</span>
+            </div>
+            <button
+              onClick={() => {
+                setIsVisible(false);
+                setTimeout(() => onRemove(toast.id), 300);
+              }}
+              className="ml-4 text-white hover:text-gray-200 transition-colors"
+            >
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const ToastContainer = ({ toasts, removeToast }) => {
+      if (!toasts.length) return null;
+      return ReactDOM.createPortal(
+        <div className="fixed top-24 right-6 z-[9999] max-w-sm">
+          {toasts.map((toast) => (
+            <Toast key={toast.id} toast={toast} onRemove={removeToast} />
+          ))}
+        </div>,
+        document.body
+      );
+    };
+
+    const Modal = ({ isOpen, onClose, title, children, size = 'md', showCloseButton = true }) => {
+      const sizeClasses = {
+        sm: 'max-w-md',
+        md: 'max-w-2xl',
+        lg: 'max-w-4xl',
+        xl: 'max-w-6xl',
+        full: 'max-w-full mx-4'
+      };
+
+      if (!isOpen) return null;
+
+      return ReactDOM.createPortal(
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+          <div className={`glass-card p-6 rounded-2xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto fade-in`}>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold">{title}</h3>
+              {showCloseButton && (
+                <button 
+                  onClick={onClose} 
+                  className="text-slate-400 hover:text-white text-xl transition-colors p-2 hover:bg-slate-700 rounded-full"
+                >
+                  <i className="fas fa-times"></i>
+                </button>
+              )}
+            </div>
+            {children}
+          </div>
+        </div>,
+        document.body
+      );
+    };
+
+    const ConfirmDialog = ({ isOpen, onClose, onConfirm, title, message, type = 'warning' }) => {
+      const typeStyles = {
+        warning: 'text-yellow-500',
+        danger: 'text-red-500',
+        info: 'text-blue-500'
+      };
+
+      const icons = {
+        warning: 'fa-exclamation-triangle',
+        danger: 'fa-exclamation-circle',
+        info: 'fa-info-circle'
+      };
+
+      if (!isOpen) return null;
+
+      return ReactDOM.createPortal(
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+          <div className="glass-card p-6 rounded-2xl max-w-md w-full fade-in">
+            <div className="text-center">
+              <div className={`text-4xl ${typeStyles[type]} mb-4`}>
+                <i className={`fas ${icons[type]}`}></i>
+              </div>
+              <h3 className="text-xl font-bold mb-3">{title}</h3>
+              <p className="text-slate-300 mb-6">{message}</p>
+              <div className="flex gap-3">
+                <button onClick={onClose} className="flex-1 btn-secondary">
+                  Cancelar
+                </button>
+                <button onClick={onConfirm} className="flex-1 btn-primary bg-red-500 hover:bg-red-600">
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      );
+    };
+    
+    // ==================== NOTA DE VENTA MODAL ====================
+    const InvoiceModal = ({ isOpen, onClose, invoiceData, onPrint, onWhatsApp, businessInfo }) => {
+      const qrCodeRef = useRef(null);
+      const invoiceElementRef = useRef(null);
+
+      useEffect(() => {
+        if (isOpen && invoiceData && qrCodeRef.current) {
+          const qrCodeInfo = {
+            numero: invoiceData.invoiceNumber,
+            total: invoiceData.total,
+            cliente: invoiceData.cliente.nombre,
+            items: invoiceData.items.map(i => `${i.nombre} x${i.cantidad}`).join(', ')
+          };
+          qrCodeRef.current.innerHTML = '';
+          new QRCode(qrCodeRef.current, {
+            text: JSON.stringify(qrCodeInfo),
+            width: 96,
+            height: 96,
+          });
+        }
+      }, [isOpen, invoiceData]);
+
+      const handlePrint = () => {
+        const printContent = invoiceElementRef.current;
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Nota de Venta</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write(`
+          body { font-family: 'Inter', sans-serif; color: #000; margin: 0; padding: 20px; }
+          .invoice-container { max-width: 800px; margin: 0 auto; padding: 40px; }
+          .invoice-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #22c55e; }
+          .invoice-title { font-size: 28px; font-weight: 800; color: #22c55e; margin-bottom: 5px; }
+          .invoice-number { font-size: 16px; font-weight: 600; color: #6b7280; }
+          .invoice-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          .invoice-table th, .invoice-table td { padding: 10px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+          .invoice-table th { background: #f8fafc; font-weight: 600; }
+          .invoice-total { background: #22c55e; color: white; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: 700; text-align: center; margin-top: 20px; display: flex; justify-content: space-between; }
+        `);
+        printWindow.document.write('</style></head><body>');
+        printWindow.document.write(printContent.innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => printWindow.print(), 500);
+      };
+
+      if (!isOpen || !invoiceData) return null;
+
+      const whatsappMessage = `¡Hola ${invoiceData.cliente.nombre || 'Cliente'}! Aquí está la nota de venta de tu compra en Farmacia Virgen de los Remedios.\n\nNúmero de Venta: *#${invoiceData.invoiceNumber}*\nFecha: *${Utils.formatDate(invoiceData.timestamp)}*\nTotal: *${Utils.formatCurrency(invoiceData.total)}*\n\nDetalle de productos:\n${invoiceData.items.map(item => `• ${item.nombre} (${item.cantidad}) - ${Utils.formatCurrency(item.precio * item.cantidad)}`).join('\n')}\n\n¡Gracias por tu compra!`;
+      const whatsappUrl = `https://wa.me/${invoiceData.cliente.telefono || businessInfo.phone}?text=${encodeURIComponent(whatsappMessage)}`;
+
+      return (
+        <Modal 
+          isOpen={isOpen} 
+          onClose={onClose} 
+          title="Nota de Venta"
+          size="lg"
+        >
+          <div ref={invoiceElementRef} className="bg-white text-slate-800 p-8 rounded-xl shadow-xl">
+            <div className="flex justify-between items-start border-b-2 border-green-500 pb-4 mb-6">
+              <div>
+                <h2 className="text-3xl font-bold text-green-600">{businessInfo.name}</h2>
+                <p className="text-sm text-slate-500">{businessInfo.address}</p>
+                <p className="text-sm text-slate-500">Tel: {businessInfo.phone}</p>
+              </div>
+              <div className="text-right">
+                <h3 className="text-lg font-semibold">NOTA DE VENTA</h3>
+                <p className="font-mono text-sm text-slate-500">N° {invoiceData.invoiceNumber}</p>
+                <p className="text-xs text-slate-400 mt-1">Fecha: {Utils.formatFullDate(invoiceData.timestamp)}</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 text-sm mb-6">
+              <div>
+                <p className="font-bold">Cliente:</p>
+                <p>{invoiceData.cliente.nombre || 'Cliente General'}</p>
+              </div>
+              <div>
+                <p className="font-bold">Teléfono:</p>
+                <p>{invoiceData.cliente.telefono || 'N/A'}</p>
+              </div>
+            </div>
+
+            <table className="w-full text-left table-auto border-collapse mb-6">
+              <thead>
+                <tr className="bg-slate-100 border-b border-slate-300 text-sm font-semibold">
+                  <th className="p-2">Producto</th>
+                  <th className="p-2 text-center">Cant.</th>
+                  <th className="p-2 text-right">P. Unit.</th>
+                  <th className="p-2 text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoiceData.items.map((item, index) => (
+                  <tr key={index} className="border-b border-slate-200 text-sm">
+                    <td className="p-2">{item.nombre}</td>
+                    <td className="p-2 text-center">{item.cantidad}</td>
+                    <td className="p-2 text-right">{Utils.formatCurrency(item.precio)}</td>
+                    <td className="p-2 text-right">{Utils.formatCurrency(item.precio * item.cantidad)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            
+            <div className="flex justify-end mb-6">
+              <div className="w-full max-w-xs">
+                <div className="flex justify-between font-bold text-lg p-2 rounded-lg bg-green-500 text-white">
+                  <span>TOTAL:</span>
+                  <span>{Utils.formatCurrency(invoiceData.total)}</span>
+                </div>
+                {invoiceData.paymentMethod === 'efectivo' && (
+                  <div className="mt-2 text-sm text-slate-600 text-right">
+                    <p>Monto Recibido: {Utils.formatCurrency(invoiceData.amountReceived)}</p>
+                    <p>Cambio: <span className="text-green-600 font-bold">{Utils.formatCurrency(invoiceData.changeAmount)}</span></p>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-slate-500">
+                <p>Método de Pago: <span className="capitalize font-semibold text-green-600">{invoiceData.paymentMethod}</span></p>
+              </div>
+              <div ref={qrCodeRef} className="w-24 h-24"></div>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 mt-6">
+            <button onClick={handlePrint} className="btn-primary">
+              <i className="fas fa-print mr-2"></i>
+              Imprimir Nota
+            </button>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              <i className="fab fa-whatsapp mr-2"></i>
+              Enviar por WhatsApp
+            </a>
+            <button onClick={onClose} className="btn-secondary">
+              <i className="fas fa-times mr-2"></i>
+              Cerrar
+            </button>
+          </div>
+        </Modal>
+      );
+    };
+
+    // ==================== NAVBAR MEJORADA ====================
+    const Navbar = () => {
+      const { 
+        currentView, 
+        setCurrentView, 
+        isAdminMode, 
+        isPOSMode,
+        setIsAdminMode,
+        setIsPOSMode,
+        cartCount, 
+        addToast 
+      } = useContext(AppContext);
+      
+      const [isScrolled, setIsScrolled] = useState(false);
+
+      useEffect(() => {
+        const handleScroll = () => {
+          setIsScrolled(window.scrollY > 10);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+      
+      const handleAdminClick = () => {
+        if (!isAdminMode) {
+          setCurrentView('login');
+        } else {
+          setCurrentView('admin');
+        }
+      };
+
+      const handlePOSClick = () => {
+        if (!isAdminMode) {
+          setCurrentView('login');
+        } else {
+          setIsPOSMode(true);
+          setCurrentView('pos');
+        }
+      };
+
+      const handleLogout = () => {
+        setIsAdminMode(false);
+        setIsPOSMode(false);
+        setCurrentView('catalog');
+        addToast('Sesión cerrada', 'info');
+      };
+
+      const getViewTitle = () => {
+        switch (currentView) {
+          case 'admin': return 'Panel Administrativo';
+          case 'pos': return 'Punto de Venta';
+          case 'cart': return 'Carrito de Compras';
+          case 'catalog': return 'Catálogo';
+          default: return '';
+        }
+      };
+
+      return (
+        <nav className={`navbar-glass fixed top-0 left-0 right-0 z-50 p-4 transition-all ${
+          isScrolled ? 'backdrop-blur-40' : 'backdrop-blur-20'
+        }`}>
+          <div className="container mx-auto flex justify-between items-center">
+            <button
+              onClick={() => setCurrentView(isAdminMode ? 'admin' : 'catalog')}
+              className="flex items-center space-x-3 text-white hover:text-green-400 transition-colors group"
+            >
+              <div className="relative">
+                <i className="fas fa-pills text-3xl group-hover:scale-110 transition-transform"></i>
+                <div className="absolute -inset-1 bg-green-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity"></div>
+              </div>
+              <div className="hidden md:block">
+                <div className="font-bold text-xl tracking-tight">
+                  Farmacia Virgen de los Remedios
+                </div>
+                <div className="text-sm text-slate-400">Cuevo, Santa Cruz</div>
+                {getViewTitle() && (
+                  <div className="text-xs text-green-400 font-medium">
+                    {getViewTitle()}
+                  </div>
+                )}
+              </div>
+            </button>
+
+            <div className="flex items-center space-x-3">
+              {currentView === 'catalog' && !isAdminMode && (
+                <button
+                  onClick={() => setCurrentView('cart')}
+                  className="relative p-3 bg-slate-700/80 hover:bg-slate-600 rounded-full transition-all group"
+                  data-cart-button
+                >
+                  <i className="fas fa-shopping-cart text-lg text-white group-hover:scale-110 transition-transform"></i>
+                  {cartCount > 0 && (
+                    <span className="cart-badge">
+                      {cartCount}
+                    </span>
+                  )}
+                </button>
+              )}
+
+              {isAdminMode ? (
+                <div className="flex items-center space-x-2">
+                  {currentView !== 'pos' && (
+                    <button
+                      onClick={handlePOSClick}
+                      className="btn-admin btn-pos"
+                    >
+                      <i className="fas fa-cash-register mr-2"></i>
+                      Punto de Venta
+                    </button>
+                  )}
+                  {currentView !== 'catalog' && (
+                    <button
+                      onClick={() => setCurrentView('catalog')}
+                      className="btn-secondary"
+                    >
+                      <i className="fas fa-store mr-2"></i>
+                      Ver Catálogo
+                    </button>
+                  )}
+                  <button onClick={handleLogout} className="btn-admin">
+                    <i className="fas fa-sign-out-alt mr-2"></i>
+                    Cerrar Sesión
+                  </button>
+                </div>
+              ) : (
+                <button onClick={handleAdminClick} className="btn-admin">
+                  <i className="fas fa-user-shield mr-2"></i>
+                  Panel Admin
+                </button>
+              )}
+            </div>
+          </div>
+        </nav>
+      );
+    };
+    
+    // ==================== VISTA DE CARRITO MEJORADA ====================
+    const CartView = () => {
+      const { cart, cartTotal, removeFromCart, updateCartQuantity, clearCart, placeOrder, setCurrentView, addToast } = useContext(AppContext);
+      const [customerData, setCustomerData] = useState({
+        nombre: '',
+        telefono: '',
+        ci: '',
+        direccion: ''
+      });
+      const [isProcessing, setIsProcessing] = useState(false);
+
+      const handleCheckout = async () => {
+        if (cart.length === 0) {
+          addToast('El carrito está vacío', 'warning');
+          return;
+        }
+        
+        if (!customerData.nombre || !customerData.telefono) {
+          addToast('Por favor, complete su nombre y teléfono', 'error');
+          return;
+        }
+
+        if (!Utils.validatePhone(customerData.telefono)) {
+          addToast('Número de teléfono inválido', 'error');
+          return;
+        }
+
+        setIsProcessing(true);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        const order = placeOrder(cart, cartTotal, customerData);
+
+        if (order) {
+          addToast('¡Pedido realizado con éxito!', 'success');
+          clearCart();
+          setCurrentView('catalog');
+        } else {
+          addToast('Hubo un error al procesar su pedido', 'error');
+        }
+        setIsProcessing(false);
+      };
+
+      return (
+        <div className="min-h-screen pt-24 pb-12">
+          <div className="container mx-auto px-4">
+            <h1 className="text-3xl font-bold mb-8">Tu Carrito de Compras</h1>
+
+            {cart.length === 0 ? (
+              <div className="glass-card text-center p-12 rounded-2xl">
+                <i className="fas fa-shopping-cart text-6xl text-slate-500 mb-4"></i>
+                <p className="text-xl text-slate-300 mb-2">Tu carrito está vacío</p>
+                <p className="text-slate-400 mb-6">Explora nuestro catálogo y agrega productos para iniciar tu compra.</p>
+                <button onClick={() => setCurrentView('catalog')} className="btn-primary">
+                  <i className="fas fa-arrow-left mr-2"></i>
+                  Volver al Catálogo
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col lg:flex-row gap-8">
+                {/* Lista de productos */}
+                <div className="lg:w-2/3">
+                  <div className="glass-card p-6 rounded-2xl space-y-4">
+                    {cart.map(item => (
+                      <div key={item.id} className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={item.imagen}
+                            alt={item.nombre}
+                            className="w-20 h-20 object-cover rounded-lg"
+                            onError={(e) => {
+                              e.target.src = 'https://placehold.co/80x80?text=Sin+Img';
+                            }}
+                          />
+                          <div>
+                            <h3 className="font-bold text-lg">{item.nombre}</h3>
+                            <p className="text-sm text-slate-400">{item.marca}</p>
+                            <p className="font-bold text-green-400">{Utils.formatCurrency(item.precio)}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center glass p-1 rounded-full">
+                            <button
+                              onClick={() => updateCartQuantity(item.id, item.cant - 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-full text-sm hover:bg-slate-700 transition-colors"
+                            >
+                              <i className="fas fa-minus"></i>
+                            </button>
+                            <span className="w-8 text-center font-bold">{item.cant}</span>
+                            <button
+                              onClick={() => updateCartQuantity(item.id, item.cant + 1)}
+                              disabled={item.cant >= item.stock}
+                              className="w-8 h-8 flex items-center justify-center rounded-full text-sm hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                              <i className="fas fa-plus"></i>
+                            </button>
+                          </div>
+                          <p className="font-bold text-lg text-green-400 hidden sm:block">
+                            {Utils.formatCurrency(item.precio * item.cant)}
+                          </p>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="text-red-400 hover:text-red-300 p-2 rounded-full hover:bg-red-400/10 transition-colors"
+                          >
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="text-right pt-4 border-t border-slate-700">
+                      <button onClick={clearCart} className="btn-secondary text-sm">
+                        <i className="fas fa-trash-alt mr-2"></i>
+                        Vaciar Carrito
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Resumen y formulario */}
+                <div className="lg:w-1/3">
+                  <div className="glass-card p-6 rounded-2xl sticky top-24">
+                    <h2 className="text-2xl font-bold mb-4">Resumen del Pedido</h2>
+                    
+                    <div className="space-y-4 mb-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Nombre completo *</label>
+                        <input
+                          type="text"
+                          value={customerData.nombre}
+                          onChange={(e) => setCustomerData(prev => ({...prev, nombre: e.target.value}))}
+                          className="w-full form-input"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Teléfono *</label>
+                        <input
+                          type="tel"
+                          value={customerData.telefono}
+                          onChange={(e) => setCustomerData(prev => ({...prev, telefono: e.target.value}))}
+                          className="w-full form-input"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Dirección (opcional)</label>
+                        <input
+                          type="text"
+                          value={customerData.direccion}
+                          onChange={(e) => setCustomerData(prev => ({...prev, direccion: e.target.value}))}
+                          className="w-full form-input"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="border-t border-slate-700 pt-6">
+                      <div className="flex justify-between font-bold text-xl mb-4">
+                        <span>Total:</span>
+                        <span className="text-green-400">{Utils.formatCurrency(cartTotal)}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-slate-400 text-sm mb-4">
+                      * El pedido será confirmado a través de WhatsApp.
+                    </p>
+
+                    <button
+                      onClick={handleCheckout}
+                      disabled={cart.length === 0 || isProcessing}
+                      className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-lg py-4"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <LoadingSpinner size="sm" />
+                          <span className="ml-2">Procesando pedido...</span>
+                        </>
+                      ) : (
+                        <>
+                          <i className="fab fa-whatsapp mr-2"></i>
+                          Confirmar Pedido
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== SISTEMA POS (PUNTO DE VENTA) ====================
+    const POSView = () => {
+      const { products, addToast, placeOrder, updateProduct, orders } = useContext(AppContext);
+      const [posCart, setPosCart] = useState([]);
+      const [customerData, setCustomerData] = useState({
+        nombre: '',
+        telefono: '',
+        ci: '',
+        direccion: ''
+      });
+      const [paymentMethod, setPaymentMethod] = useState(CONSTANTS.PAYMENT_METHODS.EFECTIVO);
+      const [amountReceived, setAmountReceived] = useState('');
+      const [searchTerm, setSearchTerm] = useState('');
+      const [showPaymentModal, setShowPaymentModal] = useState(false);
+      const [isProcessing, setIsProcessing] = useState(false);
+      const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+      const [invoiceData, setInvoiceData] = useState(null);
+
+      const filteredProducts = useMemo(() => {
+        return products.filter(product => 
+          product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.marca?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }, [products, searchTerm]);
+
+      const posTotal = useMemo(() => {
+        return posCart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+      }, [posCart]);
+
+      const changeAmount = useMemo(() => {
+        if (paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO && amountReceived) {
+          return parseFloat(amountReceived) - posTotal;
+        }
+        return 0;
+      }, [amountReceived, posTotal, paymentMethod]);
+
+      const addToPosCart = (product) => {
+        if (product.stock === 0) {
+          addToast('Producto sin stock', 'warning');
+          return;
+        }
+
+        setPosCart(prev => {
+          const existing = prev.find(item => item.id === product.id);
+          if (existing) {
+            if (existing.cantidad >= product.stock) {
+              addToast(`Solo hay ${product.stock} unidades disponibles`, 'warning');
+              return prev;
+            }
+            return prev.map(item =>
+              item.id === product.id
+                ? { ...item, cantidad: item.cantidad + 1 }
+                : item
+            );
+          } else {
+            return [...prev, { ...product, cantidad: 1 }];
+          }
+        });
+      };
+
+      const updatePosQuantity = (productId, newQuantity) => {
+        if (newQuantity <= 0) {
+          setPosCart(prev => prev.filter(item => item.id !== productId));
+          return;
+        }
+        
+        const product = products.find(p => p.id === productId);
+        if (product && newQuantity > product.stock) {
+          addToast(`Solo hay ${product.stock} unidades disponibles`, 'warning');
+          return;
+        }
+
+        setPosCart(prev =>
+          prev.map(item =>
+            item.id === productId
+              ? { ...item, cantidad: newQuantity }
+              : item
+          )
+        );
+      };
+
+      const clearPosCart = () => {
+        setPosCart([]);
+        setCustomerData({ nombre: '', telefono: '', ci: '', direccion: '' });
+        setAmountReceived('');
+      };
+
+      const handleCheckout = () => {
+        if (posCart.length === 0) {
+          addToast('Agregue productos al carrito', 'warning');
+          return;
+        }
+        setShowPaymentModal(true);
+      };
+      
+      const processPOSSale = async () => {
+        if (posCart.length === 0) {
+          addToast('Agregue productos al carrito', 'warning');
+          return;
+        }
+
+        if (paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO) {
+          if (!amountReceived || parseFloat(amountReceived) < posTotal) {
+            addToast('El monto recibido debe ser mayor al total', 'error');
+            return;
+          }
+        }
+
+        setIsProcessing(true);
+
+        try {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          const invoiceNumber = Utils.generateInvoiceNumber();
+          const orderData = {
+            id: Utils.generateId(),
+            invoiceNumber,
+            timestamp: Date.now(),
+            items: posCart.map(item => ({
+              id: item.id,
+              nombre: item.nombre,
+              marca: item.marca,
+              precio: item.precio,
+              cantidad: item.cantidad
+            })),
+            total: posTotal,
+            cliente: customerData,
+            paymentMethod,
+            amountReceived: paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO ? parseFloat(amountReceived) : posTotal,
+            changeAmount: paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO ? changeAmount : 0,
+            status: CONSTANTS.ORDER_STATUSES.POS
+          };
+
+          const order = placeOrder(posCart, posTotal, customerData, {
+            type: 'pos',
+            paymentMethod,
+            invoiceNumber
+          });
+
+          if (order) {
+            setInvoiceData(orderData);
+            setShowInvoiceModal(true);
+            clearPosCart();
+            setShowPaymentModal(false);
+            addToast('Venta procesada exitosamente', 'success');
+          }
+        } catch (error) {
+          addToast('Error al procesar la venta', 'error');
+        } finally {
+          setIsProcessing(false);
+        }
+      };
+
+      return (
+        <div className="min-h-screen pt-20">
+          <div className="admin-indicator pos-indicator">
+            <i className="fas fa-cash-register mr-2"></i>
+            Punto de Venta Activo
+          </div>
+          
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Panel de productos */}
+              <div className="lg:w-2/3">
+                <div className="glass-card p-6 rounded-2xl mb-6">
+                  <div className="flex flex-col md:flex-row gap-4 mb-6">
+                    <div className="flex-1">
+                      <div className="relative">
+                        <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                        <input
+                          type="text"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          placeholder="Buscar productos por nombre o código..."
+                          className="w-full pl-12 form-input"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={clearPosCart}
+                      className="btn-secondary text-red-400 border-red-400 hover:bg-red-400 hover:text-white"
+                      disabled={posCart.length === 0}
+                    >
+                      <i className="fas fa-trash mr-2"></i>
+                      Limpiar
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {filteredProducts.slice(0, 20).map(product => (
+                      <div
+                        key={product.id}
+                        onClick={() => addToPosCart(product)}
+                        className={`
+                          glass-card p-4 rounded-xl cursor-pointer transition-all hover:scale-105
+                          ${product.stock === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:border-green-500/30'}
+                        `}
+                      >
+                        <img
+                          src={product.imagen}
+                          alt={product.nombre}
+                          className="w-full h-20 object-cover rounded-lg mb-2"
+                          onError={(e) => {
+                            e.target.src = 'https://placehold.co/100x100?text=Sin+Img';
+                          }}
+                        />
+                        <h4 className="font-bold text-sm mb-1 line-clamp-2">{product.nombre}</h4>
+                        <p className="text-green-400 font-bold text-sm">{Utils.formatCurrency(product.precio)}</p>
+                        <p className="text-xs text-slate-400">Stock: {product.stock}</p>
+                        {product.stock === 0 && (
+                          <div className="text-xs text-red-400 font-bold mt-1">SIN STOCK</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Panel del carrito y resumen */}
+                <div className="lg:w-1/3">
+                  <div className="glass-card p-6 rounded-2xl sticky top-24">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-bold">Venta Actual</h2>
+                      <span className="text-sm text-slate-400">
+                        {posCart.reduce((sum, item) => sum + item.cantidad, 0)} items
+                      </span>
+                    </div>
+
+                    {/* Items del carrito */}
+                    <div className="max-h-64 overflow-y-auto mb-6 space-y-2">
+                      {posCart.length > 0 ? (
+                        posCart.map(item => (
+                          <div key={item.id} className="glass-card bg-slate-800/50 p-3 rounded-lg">
+                            <div className="flex items-center gap-3">
+                              <img
+                                src={item.imagen}
+                                alt={item.nombre}
+                                className="w-12 h-12 object-cover rounded-lg"
+                              />
+                              <div className="flex-1 min-w-0">
+                                <h4 className="font-medium text-sm truncate">{item.nombre}</h4>
+                                <p className="text-xs text-slate-400">{Utils.formatCurrency(item.precio)}</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => updatePosQuantity(item.id, item.cantidad - 1)}
+                                  className="w-7 h-7 bg-slate-600 hover:bg-red-600 rounded-full flex items-center justify-center text-xs"
+                                >
+                                  <i className="fas fa-minus"></i>
+                                </button>
+                                <span className="w-8 text-center font-bold text-sm">{item.cantidad}</span>
+                                <button
+                                  onClick={() => updatePosQuantity(item.id, item.cantidad + 1)}
+                                  disabled={item.cantidad >= item.stock}
+                                  className="w-7 h-7 bg-slate-600 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-full flex items-center justify-center text-xs"
+                                >
+                                  <i className="fas fa-plus"></i>
+                                </button>
+                              </div>
+                              <div className="text-right">
+                                <p className="font-bold text-green-400 text-sm">
+                                  {Utils.formatCurrency(item.precio * item.cantidad)}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center py-8 text-slate-400">
+                          <i className="fas fa-shopping-cart text-4xl mb-3"></i>
+                          <p>Carrito vacío</p>
+                          <p className="text-sm">Seleccione productos para agregar</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Datos del cliente */}
+                    <div className="mb-6">
+                      <h3 className="font-bold mb-3">Datos del Cliente</h3>
+                      <div className="space-y-3">
+                        <input
+                          type="text"
+                          value={customerData.nombre}
+                          onChange={(e) => setCustomerData(prev => ({...prev, nombre: e.target.value}))}
+                          placeholder="Nombre del cliente (opcional)"
+                          className="w-full form-input text-sm py-2"
+                        />
+                        <div className="grid grid-cols-2 gap-2">
+                          <input
+                            type="tel"
+                            value={customerData.telefono}
+                            onChange={(e) => setCustomerData(prev => ({...prev, telefono: e.target.value}))}
+                            placeholder="Teléfono"
+                            className="form-input text-sm py-2"
+                          />
+                          <input
+                            type="text"
+                            value={customerData.ci}
+                            onChange={(e) => setCustomerData(prev => ({...prev, ci: e.target.value}))}
+                            placeholder="CI"
+                            className="form-input text-sm py-2"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Resumen de totales */}
+                    <div className="space-y-3 mb-6 p-4 bg-slate-800/50 rounded-lg">
+                      <div className="border-t border-slate-600 pt-3">
+                        <div className="flex justify-between font-bold text-lg">
+                          <span>Total:</span>
+                          <span className="text-green-400">{Utils.formatCurrency(posTotal)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={handleCheckout}
+                      disabled={posCart.length === 0}
+                      className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-lg py-4"
+                    >
+                      <i className="fas fa-cash-register mr-2"></i>
+                      PROCESAR VENTA
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal de pago */}
+            <Modal
+              isOpen={showPaymentModal}
+              onClose={() => setShowPaymentModal(false)}
+              title="Procesar Pago"
+              size="md"
+            >
+              <div className="space-y-6">
+                <div className="glass-card bg-slate-800/50 p-4 rounded-lg">
+                  <h4 className="font-bold mb-3">Resumen de la Venta</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="border-t border-slate-600 pt-2 font-bold text-lg">
+                      <div className="flex justify-between">
+                        <span>Total a Pagar:</span>
+                        <span className="text-green-400">{Utils.formatCurrency(posTotal)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-3">Método de Pago:</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {Object.entries(CONSTANTS.PAYMENT_METHODS).map(([key, value]) => {
+                      const labels = {
+                        EFECTIVO: { label: 'Efectivo', icon: 'money-bill-wave' },
+                        TARJETA: { label: 'Tarjeta', icon: 'credit-card' },
+                        QR: { label: 'Código QR', icon: 'qrcode' },
+                        TRANSFERENCIA: { label: 'Transferencia', icon: 'university' }
+                      };
+                      
+                      return (
+                        <button
+                          key={key}
+                          onClick={() => setPaymentMethod(value)}
+                          className={`p-4 rounded-lg border-2 transition-all ${
+                            paymentMethod === value
+                              ? 'border-green-500 bg-green-500/20 text-green-400'
+                              : 'border-slate-600 hover:border-slate-500'
+                          }`}
+                        >
+                          <i className={`fas fa-${labels[key].icon} text-2xl mb-2`}></i>
+                          <div className="font-medium text-sm">{labels[key].label}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO && (
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Monto Recibido:</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min={posTotal}
+                      value={amountReceived}
+                      onChange={(e) => setAmountReceived(e.target.value)}
+                      placeholder="Ingrese el monto recibido"
+                      className="w-full form-input text-xl text-center font-bold"
+                    />
+                    {amountReceived && parseFloat(amountReceived) >= posTotal && (
+                      <div className="mt-3 p-3 bg-green-500/20 border border-green-500/30 rounded-lg">
+                        <div className="flex justify-between items-center">
+                          <span className="font-medium">Cambio a devolver:</span>
+                          <span className="text-green-400 font-bold text-lg">
+                            {Utils.formatCurrency(changeAmount)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowPaymentModal(false)}
+                    className="flex-1 btn-secondary"
+                    disabled={isProcessing}
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={processPOSSale}
+                    disabled={isProcessing || (paymentMethod === CONSTANTS.PAYMENT_METHODS.EFECTIVO && (!amountReceived || parseFloat(amountReceived) < posTotal))}
+                    className="flex-1 btn-primary disabled:opacity-50"
+                  >
+                    {isProcessing ? (
+                      <>
+                        <LoadingSpinner size="sm" />
+                        <span className="ml-2">Procesando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <i className="fas fa-check mr-2"></i>
+                        Finalizar Venta
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </Modal>
+            
+            {/* Modal de Nota de Venta Elegante */}
+            <InvoiceModal
+              isOpen={showInvoiceModal}
+              onClose={() => setShowInvoiceModal(false)}
+              invoiceData={invoiceData}
+              businessInfo={CONSTANTS.BUSINESS_INFO}
+            />
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== SISTEMA MEJORADO DE GESTIÓN DE PEDIDOS ====================
+    const OrderManagementView = () => {
+      const { orders, updateOrderStatus, deleteOrder, addToast, products, updateProduct } = useContext(AppContext);
+      const [selectedOrder, setSelectedOrder] = useState(null);
+      const [filterStatus, setFilterStatus] = useState('all');
+      const [filterType, setFilterType] = useState('all');
+      const [searchTerm, setSearchTerm] = useState('');
+      const [dateRange, setDateRange] = useState({ start: '', end: '' });
+      const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
+      const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+      const [invoiceData, setInvoiceData] = useState(null);
+
+      const statusOptions = [
+        { value: 'all', label: 'Todos', color: 'text-slate-400', count: orders.length },
+        { value: CONSTANTS.ORDER_STATUSES.PENDIENTE, label: 'Pendientes', color: 'text-yellow-400', count: orders.filter(o => o.status === CONSTANTS.ORDER_STATUSES.PENDIENTE).length },
+        { value: CONSTANTS.ORDER_STATUSES.CONFIRMADO, label: 'Confirmados', color: 'text-green-400', count: orders.filter(o => o.status === CONSTANTS.ORDER_STATUSES.CONFIRMADO).length },
+        { value: CONSTANTS.ORDER_STATUSES.COMPLETADO, label: 'Completados', color: 'text-blue-400', count: orders.filter(o => o.status === CONSTANTS.ORDER_STATUSES.COMPLETADO).length },
+        { value: CONSTANTS.ORDER_STATUSES.POS, label: 'Ventas POS', color: 'text-purple-400', count: orders.filter(o => o.status === CONSTANTS.ORDER_STATUSES.POS).length }
+      ];
+
+      const typeOptions = [
+        { value: 'all', label: 'Todos los tipos' },
+        { value: 'online', label: 'Pedidos Online' },
+        { value: 'pos', label: 'Ventas Presenciales' }
+      ];
+
+      const filteredOrders = useMemo(() => {
+        return orders.filter(order => {
+          const matchesStatus = filterStatus === 'all' || order.status === filterStatus;
+          const matchesType = filterType === 'all' || 
+            (filterType === 'pos' && order.status === CONSTANTS.ORDER_STATUSES.POS) ||
+            (filterType === 'online' && order.status !== CONSTANTS.ORDER_STATUSES.POS);
+          
+          const matchesSearch = !searchTerm || 
+            order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            order.cliente?.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            order.cliente?.telefono?.includes(searchTerm) ||
+            (order.invoiceNumber && order.invoiceNumber.toLowerCase().includes(searchTerm.toLowerCase()));
+
+          let matchesDate = true;
+          if (dateRange.start && dateRange.end) {
+            const orderDate = new Date(order.timestamp);
+            const startDate = new Date(dateRange.start);
+            const endDate = new Date(dateRange.end);
+            matchesDate = orderDate >= startDate && orderDate <= endDate;
+          }
+
+          return matchesStatus && matchesType && matchesSearch && matchesDate;
+        }).sort((a, b) => b.timestamp - a.timestamp);
+      }, [orders, filterStatus, filterType, searchTerm, dateRange]);
+
+      const handleStatusChange = (orderId, newStatus) => {
+        updateOrderStatus(orderId, newStatus);
+        setSelectedOrder(prev => prev && prev.id === orderId 
+          ? { ...prev, status: newStatus } 
+          : prev
+        );
+      };
+
+      const handleDeleteOrder = (order) => {
+        setShowDeleteConfirm(order);
+      };
+
+      const confirmDeleteOrder = () => {
+        if (showDeleteConfirm) {
+          const order = showDeleteConfirm;
+          // Revertir stock
+          order.items.forEach(item => {
+            const product = products.find(p => p.id === item.id);
+            if (product) {
+              updateProduct({ ...product, stock: product.stock + item.cantidad });
+            }
+          });
+          deleteOrder(order.id);
+          addToast('Pedido eliminado y stock devuelto', 'success');
+          setShowDeleteConfirm(null);
+        }
+      };
+
+      const generateOrderReport = () => {
+        const reportData = filteredOrders.map(order => ({
+          'Número': order.invoiceNumber || order.id.slice(-8),
+          'Fecha': Utils.formatDate(order.timestamp),
+          'Tipo': order.status === CONSTANTS.ORDER_STATUSES.POS ? 'Venta Presencial' : 'Pedido Online',
+          'Cliente': order.cliente?.nombre || 'Cliente General',
+          'Teléfono': order.cliente?.telefono || 'N/A',
+          'Items': order.items?.length || 0,
+          'Total': order.total,
+          'Estado': order.status.toUpperCase(),
+          'Método Pago': order.paymentMethod || 'N/A'
+        }));
+
+        const headers = Object.keys(reportData[0] || {});
+        const csv = [
+          headers.join(','),
+          ...reportData.map(row => headers.map(h => `"${row[h] || ''}"`).join(','))
+        ].join('\n');
+        
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reporte-pedidos-${Utils.formatDate(new Date(), false)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        addToast('Reporte exportado exitosamente', 'success');
+      };
+
+      const handleWhatsAppNotify = (order) => {
+        const statusLabels = {
+          [CONSTANTS.ORDER_STATUSES.CONFIRMADO]: 'confirmado y está siendo preparado',
+          [CONSTANTS.ORDER_STATUSES.COMPLETADO]: 'listo para entrega'
+        };
+
+        const message = `¡Hola ${order.cliente?.nombre || 'Cliente'}!\n\n` +
+          `Tu pedido ${order.invoiceNumber ? `#${order.invoiceNumber}` : `#${order.id.slice(-8)}`} ha sido ${statusLabels[order.status] || 'actualizado'}.\n\n` +
+          `DETALLES DEL PEDIDO:\n` +
+          order.items.map(item => `• ${item.nombre} x${item.cantidad || item.cant}`).join('\n') +
+          `\n\nTotal: ${Utils.formatCurrency(order.total)}\n` +
+          `Fecha: ${Utils.formatDate(order.timestamp)}\n\n` +
+          `${order.status === CONSTANTS.ORDER_STATUSES.COMPLETADO 
+            ? '¡Tu pedido está listo para recoger!' 
+            : 'Te mantendremos informado del progreso.'}\n\n` +
+          `Gracias por confiar en Farmacia Virgen de los Remedios!`;
+
+        const whatsappUrl = `https://wa.me/${order.cliente?.telefono || CONSTANTS.PHONE_WHATSAPP}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        addToast('Notificación enviada por WhatsApp', 'success');
+      };
+
+      const handleViewInvoice = (order) => {
+        setInvoiceData(order);
+        setShowInvoiceModal(true);
+      };
+
+      const totalSales = useMemo(() => {
+        return filteredOrders.reduce((sum, order) => sum + order.total, 0);
+      }, [filteredOrders]);
+
+      return (
+        <div className="space-y-6">
+          {/* Header con estadísticas */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div>
+              <h2 className="text-2xl font-bold mb-2">Gestión de Pedidos y Ventas</h2>
+              <div className="flex gap-4 text-sm text-slate-400">
+                <span>Total: {filteredOrders.length} pedidos</span>
+                <span>•</span>
+                <span>Ventas: {Utils.formatCurrency(totalSales)}</span>
+              </div>
+            </div>
+            <button onClick={generateOrderReport} className="btn-primary">
+              <i className="fas fa-download mr-2"></i>
+              Exportar Reporte
+            </button>
+          </div>
+
+          {/* Filtros mejorados */}
+          <div className="glass-card p-6 rounded-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Buscar:</label>
+                <div className="relative">
+                  <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="ID, cliente, teléfono..."
+                    className="w-full pl-10 form-input"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-2">Tipo:</label>
+                <select
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className="w-full form-input"
+                >
+                  {typeOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Desde:</label>
+                <input
+                  type="date"
+                  value={dateRange.start}
+                  onChange={(e) => setDateRange(prev => ({...prev, start: e.target.value}))}
+                  className="w-full form-input"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Hasta:</label>
+                <input
+                  type="date"
+                  value={dateRange.end}
+                  onChange={(e) => setDateRange(prev => ({...prev, end: e.target.value}))}
+                  className="w-full form-input"
+                />
+              </div>
+            </div>
+
+            {/* Filtros de estado */}
+            <div className="flex gap-2 flex-wrap">
+              {statusOptions.map(status => (
+                <button
+                  key={status.value}
+                  onClick={() => setFilterStatus(status.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    filterStatus === status.value
+                      ? 'bg-green-500 text-white'
+                      : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  {status.label} ({status.count})
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tabla de pedidos */}
+          <div className="glass-card rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="table-professional w-full">
+                <thead>
+                  <tr>
+                    <th>Número</th>
+                    <th>Tipo</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredOrders.length > 0 ? filteredOrders.map(order => (
+                    <tr key={order.id}>
+                      <td>
+                        <div className="font-mono text-sm">
+                          #{order.invoiceNumber || order.id.slice(-8)}
+                        </div>
+                      </td>
+                      <td>
+                        <span className={`status-badge ${
+                          order.status === CONSTANTS.ORDER_STATUSES.POS ? 'status-pos' : 'status-confirmado'
+                        }`}>
+                          {order.status === CONSTANTS.ORDER_STATUSES.POS ? (
+                            <>
+                              <i className="fas fa-cash-register mr-1"></i>
+                              POS
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-globe mr-1"></i>
+                              Online
+                            </>
+                          )}
+                        </span>
+                      </td>
+                      <td>
+                        <div>
+                          <p className="font-medium">{order.cliente?.nombre || 'Cliente General'}</p>
+                          <p className="text-sm text-slate-400">{order.cliente?.telefono || 'Sin teléfono'}</p>
+                        </div>
+                      </td>
+                      <td className="text-sm">{Utils.formatDate(order.timestamp)}</td>
+                      <td>
+                        <button
+                          onClick={() => setSelectedOrder(order)}
+                          className="text-blue-400 hover:text-blue-300 text-sm"
+                        >
+                          {order.items?.length || 0} productos
+                          <i className="fas fa-eye ml-1"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <div>
+                          <div className="font-bold text-green-400">{Utils.formatCurrency(order.total)}</div>
+                          {order.paymentMethod && (
+                            <div className="text-xs text-slate-400 capitalize">{order.paymentMethod}</div>
+                          )}
+                        </div>
+                      </td>
+                      <td>
+                        {order.status === CONSTANTS.ORDER_STATUSES.POS ? (
+                          <span className="status-badge status-pos">
+                            <i className="fas fa-check-circle mr-1"></i>
+                            COMPLETADO
+                          </span>
+                        ) : (
+                          <select
+                            value={order.status}
+                            onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                            className={`status-badge status-${order.status} bg-transparent border-none text-sm cursor-pointer`}
+                          >
+                            <option value={CONSTANTS.ORDER_STATUSES.PENDIENTE}>Pendiente</option>
+                            <option value={CONSTANTS.ORDER_STATUSES.CONFIRMADO}>Confirmado</option>
+                            <option value={CONSTANTS.ORDER_STATUSES.COMPLETADO}>Completado</option>
+                          </select>
+                        )}
+                      </td>
+                      <td>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleViewInvoice(order)}
+                            className="text-purple-400 hover:text-purple-300 p-2 rounded-lg hover:bg-purple-400/10 tooltip"
+                            data-tooltip="Ver Nota de Venta"
+                          >
+                            <i className="fas fa-file-invoice"></i>
+                          </button>
+                          {order.status !== CONSTANTS.ORDER_STATUSES.POS && order.cliente?.telefono && (
+                            <button
+                              onClick={() => handleWhatsAppNotify(order)}
+                              className="text-green-400 hover:text-green-300 p-2 rounded-lg hover:bg-green-400/10 tooltip"
+                              data-tooltip="Notificar por WhatsApp"
+                            >
+                              <i className="fab fa-whatsapp"></i>
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleDeleteOrder(order)}
+                            className="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-400/10 tooltip"
+                            data-tooltip="Eliminar pedido"
+                          >
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td colSpan="8" className="text-center p-8 text-slate-400">
+                        <i className="fas fa-search text-4xl mb-3"></i>
+                        <p>No hay pedidos que coincidan con los filtros</p>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Modal de detalles del pedido */}
+          {selectedOrder && (
+            <OrderDetailModal
+              order={selectedOrder}
+              onClose={() => setSelectedOrder(null)}
+              onStatusChange={handleStatusChange}
+            />
+          )}
+
+          {/* Modal de confirmación para eliminar pedido */}
+          <ConfirmDialog
+            isOpen={!!showDeleteConfirm}
+            onClose={() => setShowDeleteConfirm(null)}
+            onConfirm={confirmDeleteOrder}
+            title="Eliminar Pedido"
+            message={`¿Está seguro de eliminar el pedido #${showDeleteConfirm?.invoiceNumber || showDeleteConfirm?.id.slice(-8)}? Esta acción devolverá el stock de los productos.`}
+            type="danger"
+          />
+
+          {/* Modal de Nota de Venta para Pedidos Anteriores */}
+          <InvoiceModal
+            isOpen={showInvoiceModal}
+            onClose={() => setShowInvoiceModal(false)}
+            invoiceData={invoiceData}
+            businessInfo={CONSTANTS.BUSINESS_INFO}
+          />
+        </div>
+      );
+    };
+
+    // ==================== MODAL MEJORADO DE DETALLES DE PEDIDO ====================
+    const OrderDetailModal = ({ order, onClose, onStatusChange }) => {
+      return (
+        <Modal isOpen={!!order} onClose={onClose} title={`Pedido #${order.invoiceNumber || order.id.slice(-8)}`} size="lg">
+          <div className="space-y-6">
+            {/* Información del pedido */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="glass-card bg-slate-800/50 p-4 rounded-xl">
+                <h4 className="font-bold mb-3 flex items-center">
+                  <i className="fas fa-info-circle mr-2 text-blue-400"></i>
+                  Información del Pedido
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <div><strong>Número:</strong> #{order.invoiceNumber || order.id.slice(-8)}</div>
+                  <div><strong>Fecha:</strong> {Utils.formatFullDate(order.timestamp)}</div>
+                  <div><strong>Tipo:</strong> 
+                    <span className={`ml-2 status-badge ${
+                      order.status === CONSTANTS.ORDER_STATUSES.POS ? 'status-pos' : 'status-confirmado'
+                    }`}>
+                      {order.status === CONSTANTS.ORDER_STATUSES.POS ? 'Venta Presencial' : 'Pedido Online'}
+                    </span>
+                  </div>
+                  {order.paymentMethod && (
+                    <div><strong>Método de Pago:</strong> 
+                      <span className="capitalize ml-2">{order.paymentMethod}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="glass-card bg-slate-800/50 p-4 rounded-xl">
+                <h4 className="font-bold mb-3 flex items-center">
+                  <i className="fas fa-user mr-2 text-green-400"></i>
+                  Información del Cliente
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <div><strong>Nombre:</strong> {order.cliente?.nombre || 'Cliente General'}</div>
+                  <div><strong>Teléfono:</strong> {order.cliente?.telefono || 'N/A'}</div>
+                  <div><strong>CI:</strong> {order.cliente?.ci || 'N/A'}</div>
+                  <div><strong>Dirección:</strong> {order.cliente?.direccion || 'N/A'}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Productos del pedido */}
+            <div>
+              <h4 className="font-bold mb-3 flex items-center">
+                <i className="fas fa-shopping-bag mr-2 text-purple-400"></i>
+                Productos ({order.items?.length || 0})
+              </h4>
+              <div className="max-h-64 overflow-y-auto space-y-2">
+                {order.items?.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between bg-slate-800/50 p-3 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={item.imagen || 'https://placehold.co/50'}
+                        alt={item.nombre}
+                        className="w-12 h-12 object-cover rounded-lg"
+                        onError={(e) => {
+                          e.target.src = 'https://placehold.co/50x50?text=Sin+Img';
+                        }}
+                      />
+                      <div>
+                        <p className="font-medium">{item.nombre}</p>
+                        <p className="text-sm text-slate-400">{item.marca || ''}</p>
+                        <p className="text-xs text-slate-500">
+                          {Utils.formatCurrency(item.precio)} x {item.cantidad || item.cant}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-green-400">
+                        {Utils.formatCurrency(item.precio * (item.cantidad || item.cant))}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Totales */}
+            <div className="glass-card bg-slate-800/50 p-4 rounded-xl">
+              <h4 className="font-bold mb-3 flex items-center">
+                <i className="fas fa-calculator mr-2 text-yellow-400"></i>
+                Resumen de Totales
+              </h4>
+              <div className="space-y-2">
+                <div className="border-t border-slate-600 pt-2">
+                  <div className="flex justify-between font-bold text-lg">
+                    <span>Total:</span>
+                    <span className="text-green-400">{Utils.formatCurrency(order.total)}</span>
+                  </div>
+                </div>
+                {order.amountReceived && order.changeAmount >= 0 && (
+                  <div className="mt-3 pt-3 border-t border-slate-600 text-sm">
+                    <div className="flex justify-between">
+                      <span>Monto Recibido:</span>
+                      <span>{Utils.formatCurrency(order.amountReceived)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Cambio:</span>
+                      <span className="text-blue-400">{Utils.formatCurrency(order.changeAmount)}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Estado y acciones */}
+            <div className="flex justify-between items-center border-t border-slate-700 pt-4">
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Estado del pedido:</label>
+                {order.status === CONSTANTS.ORDER_STATUSES.POS ? (
+                  <span className="status-badge status-pos">
+                    <i className="fas fa-check-circle mr-1"></i>
+                    VENTA COMPLETADA
+                  </span>
+                ) : (
+                  <select
+                    value={order.status}
+                    onChange={(e) => onStatusChange(order.id, e.target.value)}
+                    className="bg-slate-700 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  >
+                    <option value={CONSTANTS.ORDER_STATUSES.PENDIENTE}>Pendiente</option>
+                    <option value={CONSTANTS.ORDER_STATUSES.CONFIRMADO}>Confirmado</option>
+                    <option value={CONSTANTS.ORDER_STATUSES.COMPLETADO}>Completado</option>
+                  </select>
+                )}
+              </div>
+              
+              {order.invoiceNumber && (
+                <div className="text-right">
+                  <p className="text-slate-400 text-sm mb-1">Nota de Venta</p>
+                  <p className="font-mono text-sm bg-slate-700 px-3 py-1 rounded">
+                    #{order.invoiceNumber}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </Modal>
+      );
+    };
+
+    // ==================== SISTEMA MEJORADO DE GESTIÓN DE INVENTARIO ====================
+    const InventoryManagementView = () => {
+      const { products, addProduct, updateProduct, deleteProduct, addToast, stockAnalysis } = useContext(AppContext);
+      const [editingProduct, setEditingProduct] = useState(null);
+      const [showAddForm, setShowAddForm] = useState(false);
+      const [showConfirmDelete, setShowConfirmDelete] = useState(null);
+      const [searchTerm, setSearchTerm] = useState('');
+      const [filterCategory, setFilterCategory] = useState('all');
+      const [filterSubcategory, setFilterSubcategory] = useState('all');
+      const [filterStock, setFilterStock] = useState('all');
+      const [sortBy, setSortBy] = useState('name');
+      const [selectedProducts, setSelectedProducts] = useState([]);
+
+      const mainCategories = useMemo(() => CONSTANTS.CATEGORIES, []);
+      const subcategories = useMemo(() => {
+        const category = mainCategories.find(c => c.value === filterCategory);
+        return category?.subcategories || [];
+      }, [filterCategory, mainCategories]);
+
+      const stockFilters = [
+        { value: 'all', label: 'Todo el stock' },
+        { value: 'outofstock', label: 'Sin stock' },
+        { value: 'lowstock', label: 'Stock bajo' },
+        { value: 'instock', label: 'En stock' }
+      ];
+
+      const sortOptions = [
+        { value: 'name', label: 'Nombre A-Z' },
+        { value: 'name-desc', label: 'Nombre Z-A' },
+        { value: 'price-asc', label: 'Precio menor' },
+        { value: 'price-desc', label: 'Precio mayor' },
+        { value: 'stock-asc', label: 'Menor stock' },
+        { value: 'stock-desc', label: 'Mayor stock' },
+        { value: 'category', label: 'Por categoría' }
+      ];
+
+      const filteredProducts = useMemo(() => {
+        let filtered = products.filter(product => {
+          const matchesSearch = product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                               product.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                               (product.marca && product.marca.toLowerCase().includes(searchTerm.toLowerCase()));
+          
+          const matchesCategory = filterCategory === 'all' || product.categoria === filterCategory;
+          const matchesSubcategory = filterSubcategory === 'all' || product.subcategoria === filterSubcategory;
+          
+          let matchesStock = true;
+          if (filterStock === 'outofstock') {
+            matchesStock = product.stock === 0;
+          } else if (filterStock === 'lowstock') {
+            matchesStock = product.stock > 0 && product.stock <= CONSTANTS.LOW_STOCK_THRESHOLD;
+          } else if (filterStock === 'instock') {
+            matchesStock = product.stock > CONSTANTS.LOW_STOCK_THRESHOLD;
+          }
+
+          return matchesSearch && matchesCategory && matchesSubcategory && matchesStock;
+        });
+
+        filtered.sort((a, b) => {
+          switch (sortBy) {
+            case 'name':
+              return a.nombre.localeCompare(b.nombre);
+            case 'name-desc':
+              return b.nombre.localeCompare(a.nombre);
+            case 'price-asc':
+              return a.precio - b.precio;
+            case 'price-desc':
+              return b.precio - a.precio;
+            case 'stock-asc':
+              return a.stock - b.stock;
+            case 'stock-desc':
+              return b.stock - a.stock;
+            case 'category':
+              return a.categoria.localeCompare(b.categoria);
+            default:
+              return 0;
+          }
+        });
+
+        return filtered;
+      }, [products, searchTerm, filterCategory, filterSubcategory, filterStock, sortBy]);
+
+      const handleBulkStockUpdate = (adjustment) => {
+        if (selectedProducts.length === 0) {
+          addToast('Seleccione productos para actualizar', 'warning');
+          return;
+        }
+
+        selectedProducts.forEach(productId => {
+          const product = products.find(p => p.id === productId);
+          if (product) {
+            const newStock = Math.max(0, product.stock + adjustment);
+            updateProduct({ ...product, stock: newStock });
+          }
+        });
+
+        addToast(`Stock actualizado para ${selectedProducts.length} productos`, 'success');
+        setSelectedProducts([]);
+      };
+
+      const handleQuickStockUpdate = (productId, newStock) => {
+        const product = products.find(p => p.id === productId);
+        if (product && newStock >= 0) {
+          updateProduct({ ...product, stock: parseInt(newStock) });
+        }
+      };
+
+      const handleDelete = (product) => {
+        setShowConfirmDelete(product);
+      };
+
+      const confirmDelete = () => {
+        if (showConfirmDelete) {
+          deleteProduct(showConfirmDelete.id);
+          setShowConfirmDelete(null);
+        }
+      };
+
+      const exportInventory = () => {
+        const csvData = filteredProducts.map(p => ({
+          'ID': p.id,
+          'Nombre': p.nombre,
+          'Marca': p.marca || '',
+          'Categoría': mainCategories.find(c => c.value === p.categoria)?.label || p.categoria,
+          'Subcategoría': p.subcategoria,
+          'Descripción': p.descripcion || '',
+          'Precio': p.precio,
+          'Stock': p.stock,
+          'Valor Total': p.precio * p.stock,
+          'Estado': p.stock === 0 ? 'Sin Stock' : 
+                   p.stock <= CONSTANTS.LOW_STOCK_THRESHOLD ? 'Stock Bajo' : 'Normal'
+        }));
+
+        const headers = Object.keys(csvData[0] || {});
+        const csv = [
+          headers.join(','),
+          ...csvData.map(row => headers.map(h => `"${row[h] || ''}"`).join(','))
+        ].join('\n');
+        
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `inventario-${Utils.formatDate(new Date(), false)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        addToast('Inventario exportado exitosamente', 'success');
+      };
+
+      const inventoryStats = useMemo(() => {
+        const totalValue = filteredProducts.reduce((sum, p) => sum + (p.precio * p.stock), 0);
+        const totalProducts = filteredProducts.length;
+        const totalStock = filteredProducts.reduce((sum, p) => sum + p.stock, 0);
+        return { totalValue, totalProducts, totalStock };
+      }, [filteredProducts]);
+
+      return (
+        <div className="space-y-6">
+          {/* Header con estadísticas */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div className="glass-card p-4 rounded-xl">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-boxes text-white text-xl"></i>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-slate-400">Total Productos</p>
+                  <p className="text-xl font-bold">{inventoryStats.totalProducts}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="glass-card p-4 rounded-xl">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-warehouse text-white text-xl"></i>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-slate-400">Unidades Totales</p>
+                  <p className="text-xl font-bold">{inventoryStats.totalStock}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="glass-card p-4 rounded-xl">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-dollar-sign text-white text-xl"></i>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-slate-400">Valor Inventario</p>
+                  <p className="text-xl font-bold">{Utils.formatCurrency(inventoryStats.totalValue)}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="glass-card p-4 rounded-xl">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-exclamation-triangle text-white text-xl"></i>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-slate-400">Stock Bajo</p>
+                  <p className="text-xl font-bold text-yellow-400">{stockAnalysis.lowStock.length}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Controles y filtros */}
+          <div className="glass-card p-6 rounded-2xl">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+              <h2 className="text-2xl font-bold">Gestión de Inventario</h2>
+              <div className="flex gap-3">
+                <button onClick={exportInventory} className="btn-secondary">
+                  <i className="fas fa-download mr-2"></i>
+                  Exportar
+                </button>
+                <button onClick={() => setShowAddForm(true)} className="btn-primary">
+                  <i className="fas fa-plus mr-2"></i>
+                  Nuevo Producto
+                </button>
+              </div>
+            </div>
+
+            {/* Filtros */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Buscar:</label>
+                <div className="relative">
+                  <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Nombre, marca..."
+                    className="w-full pl-10 form-input"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Categoría:</label>
+                <select
+                  value={filterCategory}
+                  onChange={(e) => {
+                    setFilterCategory(e.target.value);
+                    setFilterSubcategory('all');
+                  }}
+                  className="w-full form-input"
+                >
+                  {mainCategories.map(cat => (
+                    <option key={cat.value} value={cat.value}>{cat.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {subcategories.length > 0 && (
+                <div>
+                  <label className="block text-sm font-medium mb-2">Subcategoría:</label>
+                  <select
+                    value={filterSubcategory}
+                    onChange={(e) => setFilterSubcategory(e.target.value)}
+                    className="w-full form-input"
+                  >
+                    <option value="all">Todas</option>
+                    {subcategories.map(subcat => (
+                      <option key={subcat.value} value={subcat.value}>{subcat.label}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Stock:</label>
+                <select
+                  value={filterStock}
+                  onChange={(e) => setFilterStock(e.target.value)}
+                  className="w-full form-input"
+                >
+                  {stockFilters.map(filter => (
+                    <option key={filter.value} value={filter.value}>{filter.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Ordenar:</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full form-input"
+                >
+                  {sortOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Acciones:</label>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleBulkStockUpdate(10)}
+                    disabled={selectedProducts.length === 0}
+                    className="btn-primary text-xs px-3 py-2 disabled:opacity-50"
+                    title="Agregar 10 unidades"
+                  >
+                    +10
+                  </button>
+                  <button
+                    onClick={() => handleBulkStockUpdate(-10)}
+                    disabled={selectedProducts.length === 0}
+                    className="btn-secondary text-xs px-3 py-2 disabled:opacity-50"
+                    title="Restar 10 unidades"
+                  >
+                    -10
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tabla de productos */}
+          <div className="glass-card rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="table-professional w-full">
+                <thead>
+                  <tr>
+                    <th>
+                      <input
+                        type="checkbox"
+                        checked={selectedProducts.length === filteredProducts.length && filteredProducts.length > 0}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedProducts(filteredProducts.map(p => p.id));
+                          } else {
+                            setSelectedProducts([]);
+                          }
+                        }}
+                        className="rounded focus:ring-green-500"
+                      />
+                    </th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock Actual</th>
+                    <th>Valor Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredProducts.map(product => (
+                    <tr key={product.id}>
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={selectedProducts.includes(product.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedProducts(prev => [...prev, product.id]);
+                            } else {
+                              setSelectedProducts(prev => prev.filter(id => id !== product.id));
+                            }
+                          }}
+                          className="rounded focus:ring-green-500"
+                        />
+                      </td>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={product.imagen}
+                            alt={product.nombre}
+                            className="w-16 h-16 object-cover rounded-lg"
+                            onError={(e) => {
+                              e.target.src = 'https://placehold.co/64x64?text=Sin+Img';
+                            }}
+                          />
+                          <div>
+                            <p className="font-medium">{product.nombre}</p>
+                            <p className="text-sm text-slate-400">{product.marca}</p>
+                            <p className="text-xs text-slate-500">ID: {product.id}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="capitalize bg-slate-700 px-3 py-1 rounded-full text-sm">
+                          {mainCategories.find(c => c.value === product.categoria)?.label || 'Sin Categoría'}
+                        </span>
+                        {product.subcategoria && (
+                          <div className="text-xs text-slate-400 mt-1">
+                            {mainCategories.find(c => c.value === product.categoria)?.subcategories?.find(s => s.value === product.subcategoria)?.label || ''}
+                          </div>
+                        )}
+                      </td>
+                      <td className="font-bold">{Utils.formatCurrency(product.precio)}</td>
+                      <td>
+                        <input
+                          type="number"
+                          value={product.stock}
+                          onChange={(e) => handleQuickStockUpdate(product.id, e.target.value)}
+                          className="w-20 px-2 py-1 bg-slate-700 rounded text-center focus:outline-none focus:ring-2 focus:ring-green-500"
+                          min="0"
+                        />
+                      </td>
+                      <td className="font-bold text-green-400">
+                        {Utils.formatCurrency(product.precio * product.stock)}
+                      </td>
+                      <td>
+                        <span className={`status-badge ${
+                          product.stock === 0 ? 'bg-red-500/20 text-red-400 border-red-400' :
+                          product.stock <= CONSTANTS.CRITICAL_STOCK_THRESHOLD ? 'bg-red-500/20 text-red-400 border-red-400' :
+                          product.stock <= CONSTANTS.LOW_STOCK_THRESHOLD ? 'bg-yellow-500/20 text-yellow-400 border-yellow-400' :
+                          'bg-green-500/20 text-green-400 border-green-400'
+                        }`}>
+                          {product.stock === 0 ? (
+                            <>
+                              <i className="fas fa-times-circle mr-1"></i>
+                              Sin Stock
+                            </>
+                          ) : product.stock <= CONSTANTS.CRITICAL_STOCK_THRESHOLD ? (
+                            <>
+                              <i className="fas fa-exclamation-triangle mr-1"></i>
+                              Crítico
+                            </>
+                          ) : product.stock <= CONSTANTS.LOW_STOCK_THRESHOLD ? (
+                            <>
+                              <i className="fas fa-exclamation-circle mr-1"></i>
+                              Bajo
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-check-circle mr-1"></i>
+                              Normal
+                            </>
+                          )}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setEditingProduct(product)}
+                            className="text-blue-400 hover:text-blue-300 p-2 rounded-lg hover:bg-blue-400/10 tooltip"
+                            data-tooltip="Editar producto"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </button>
+                          <button
+                            onClick={() => handleDelete(product)}
+                            className="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-400/10 tooltip"
+                            data-tooltip="Eliminar producto"
+                          >
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Modales */}
+          {(editingProduct || showAddForm) && (
+            <ProductFormModal
+              product={editingProduct}
+              onClose={() => {
+                setEditingProduct(null);
+                setShowAddForm(false);
+              }}
+            />
+          )}
+
+          <ConfirmDialog
+            isOpen={!!showConfirmDelete}
+            onClose={() => setShowConfirmDelete(null)}
+            onConfirm={confirmDelete}
+            title="Eliminar Producto"
+            message={`¿Está seguro de eliminar "${showConfirmDelete?.nombre}"? Esta acción no se puede deshacer.`}
+            type="danger"
+          />
+        </div>
+      );
+    };
+
+    // ==================== FORMULARIO MEJORADO DE PRODUCTO ====================
+    const ProductFormModal = ({ product, onClose }) => {
+      const { addProduct, updateProduct, addToast } = useContext(AppContext);
+      const [formData, setFormData] = useState({
+        nombre: product?.nombre || '',
+        descripcion: product?.descripcion || '',
+        precio: product?.precio || '',
+        stock: product?.stock || '',
+        categoria: product?.categoria || 'farmacia',
+        subcategoria: product?.subcategoria || '',
+        marca: product?.marca || '',
+        imagen: product?.imagen || ''
+      });
+      const [imagePreview, setImagePreview] = useState(product?.imagen || '');
+      const [isUploading, setIsUploading] = useState(false);
+      const [errors, setErrors] = useState({});
+      const fileInputRef = useRef(null);
+
+      const mainCategories = useMemo(() => CONSTANTS.CATEGORIES.filter(c => c.value !== 'all'), []);
+      const subcategories = useMemo(() => {
+        const category = mainCategories.find(c => c.value === formData.categoria);
+        return category?.subcategories || [];
+      }, [formData.categoria, mainCategories]);
+
+      useEffect(() => {
+        if (subcategories.length > 0 && !subcategories.some(s => s.value === formData.subcategoria)) {
+          setFormData(prev => ({ ...prev, subcategoria: '' }));
+        } else if (subcategories.length === 0) {
+          setFormData(prev => ({ ...prev, subcategoria: '' }));
+        }
+      }, [formData.categoria, formData.subcategoria, subcategories]);
+
+      const validateForm = () => {
+        const newErrors = {};
+        
+        if (!formData.nombre.trim()) {
+          newErrors.nombre = 'El nombre es requerido';
+        }
+        
+        if (!formData.precio || parseFloat(formData.precio) <= 0) {
+          newErrors.precio = 'Ingrese un precio válido';
+        }
+        
+        if (formData.stock === '' || parseInt(formData.stock) < 0) {
+          newErrors.stock = 'Ingrese un stock válido';
+        }
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+      };
+
+      const handleInputChange = (field, value) => {
+        setFormData(prev => ({...prev, [field]: value}));
+        if (errors[field]) {
+          setErrors(prev => ({...prev, [field]: ''}));
+        }
+      };
+
+      const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+          addToast('Solo se permiten archivos de imagen', 'error');
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          addToast('La imagen no debe superar 5MB', 'error');
+          return;
+        }
+
+        setIsUploading(true);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageData = e.target.result;
+          setImagePreview(imageData);
+          handleInputChange('imagen', imageData);
+          setIsUploading(false);
+          addToast('Imagen cargada correctamente', 'success');
+        };
+        reader.onerror = () => {
+          setIsUploading(false);
+          addToast('Error al cargar la imagen', 'error');
+        };
+        reader.readAsDataURL(file);
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+          return;
+        }
+
+        const productData = {
+          ...formData,
+          precio: parseFloat(formData.precio),
+          stock: parseInt(formData.stock),
+          nombre: Utils.sanitizeText(formData.nombre.trim()),
+          descripcion: Utils.sanitizeText(formData.descripcion.trim()),
+          marca: Utils.sanitizeText(formData.marca.trim()),
+          subcategoria: formData.subcategoria === 'all' ? null : formData.subcategoria,
+        };
+
+        if (product) {
+          updateProduct({ ...productData, id: product.id });
+          addToast('Producto actualizado exitosamente', 'success');
+        } else {
+          addProduct(productData);
+          addToast('Producto agregado exitosamente', 'success');
+        }
+        onClose();
+      };
+
+      return (
+        <Modal 
+          isOpen={true} 
+          onClose={onClose} 
+          title={product ? 'Editar Producto' : 'Nuevo Producto'} 
+          size="lg"
+        >
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Sección de imagen */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Imagen del Producto</label>
+                <div className="space-y-4">
+                  <div className="border-2 border-dashed border-slate-600 rounded-xl p-4 text-center hover:border-green-500 transition-colors">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    {imagePreview ? (
+                      <div className="relative">
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setImagePreview('');
+                            handleInputChange('imagen', '');
+                          }}
+                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600"
+                        >
+                          <i className="fas fa-times text-sm"></i>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="py-8">
+                        <i className="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-4"></i>
+                        <p className="text-slate-400 mb-2">Sube una imagen</p>
+                        <p className="text-xs text-slate-500">JPG, PNG, GIF (máx. 5MB)</p>
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isUploading}
+                      className="mt-4 btn-secondary text-sm disabled:opacity-50"
+                    >
+                      {isUploading ? (
+                        <>
+                          <LoadingSpinner size="sm" />
+                          <span className="ml-2">Subiendo...</span>
+                        </>
+                      ) : (
+                        <>
+                          <i className="fas fa-upload mr-2"></i>
+                          {imagePreview ? 'Cambiar imagen' : 'Seleccionar imagen'}
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">O ingresa URL de imagen:</label>
+                    <input
+                      type="url"
+                      value={formData.imagen.startsWith('data:') ? '' : formData.imagen}
+                      onChange={(e) => {
+                        handleInputChange('imagen', e.target.value);
+                        if (e.target.value) {
+                          setImagePreview(e.target.value);
+                        }
+                      }}
+                      className="w-full form-input text-sm"
+                      placeholder="https://ejemplo.com/imagen.jpg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Sección de datos */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Nombre *</label>
+                  <input
+                    type="text"
+                    value={formData.nombre}
+                    onChange={(e) => handleInputChange('nombre', e.target.value)}
+                    className={`w-full form-input ${errors.nombre ? 'border-red-500' : ''}`}
+                    placeholder="Nombre del producto"
+                    required
+                  />
+                  {errors.nombre && <p className="text-red-400 text-sm mt-1">{errors.nombre}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Marca</label>
+                  <input
+                    type="text"
+                    value={formData.marca}
+                    onChange={(e) => handleInputChange('marca', e.target.value)}
+                    className="w-full form-input"
+                    placeholder="Marca del producto"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Precio (Bs.) *</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.precio}
+                      onChange={(e) => handleInputChange('precio', e.target.value)}
+                      className={`w-full form-input ${errors.precio ? 'border-red-500' : ''}`}
+                      placeholder="0.00"
+                      required
+                    />
+                    {errors.precio && <p className="text-red-400 text-sm mt-1">{errors.precio}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Stock *</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={formData.stock}
+                      onChange={(e) => handleInputChange('stock', e.target.value)}
+                      className={`w-full form-input ${errors.stock ? 'border-red-500' : ''}`}
+                      placeholder="0"
+                      required
+                    />
+                    {errors.stock && <p className="text-red-400 text-sm mt-1">{errors.stock}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Categoría</label>
+                  <select
+                    value={formData.categoria}
+                    onChange={(e) => {
+                      handleInputChange('categoria', e.target.value);
+                      handleInputChange('subcategoria', '');
+                    }}
+                    className="w-full form-input"
+                  >
+                    {mainCategories.map(c => (
+                      <option key={c.value} value={c.value}>{c.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {subcategories.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Subcategoría</label>
+                    <select
+                      value={formData.subcategoria}
+                      onChange={(e) => handleInputChange('subcategoria', e.target.value)}
+                      className="w-full form-input"
+                    >
+                      <option value="">Seleccione...</option>
+                      {subcategories.map(subcat => (
+                        <option key={subcat.value} value={subcat.value}>{subcat.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Descripción</label>
+              <textarea
+                value={formData.descripcion}
+                onChange={(e) => handleInputChange('descripcion', e.target.value)}
+                className="w-full form-input"
+                rows="4"
+                placeholder="Descripción detallada del producto, indicaciones, presentación..."
+              />
+            </div>
+
+            <div className="flex gap-4 pt-4 border-t border-slate-700">
+              <button type="submit" className="flex-1 btn-primary">
+                <i className="fas fa-save mr-2"></i>
+                {product ? 'Actualizar Producto' : 'Crear Producto'}
+              </button>
+              <button type="button" onClick={onClose} className="flex-1 btn-secondary">
+                <i className="fas fa-times mr-2"></i>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </Modal>
+      );
+    };
+
+    // ==================== PROVIDER PRINCIPAL MEJORADO ====================
+    const AppProvider = ({ children }) => {
+      const [products, setProducts] = useLocalStorage('productos', []);
+      const [cart, setCart] = useState([]);
+      const [orders, setOrders] = useLocalStorage('pedidos', []);
+      const [currentView, setCurrentView] = useState('catalog');
+      const [isAdminMode, setIsAdminMode] = useState(false);
+      const [isPOSMode, setIsPOSMode] = useState(false);
+      const [loading, setLoading] = useState(true);
+      const { toasts, addToast, removeToast } = useToast();
+
+      useEffect(() => {
+        loadInitialData();
+      }, []);
+
+      const loadInitialData = async () => {
+        try {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          if (products.length === 0) {
+            const initialProducts = getInitialProducts();
+            setProducts(initialProducts);
+          }
+        } catch (error) {
+          console.error('Error loading data:', error);
+          addToast('Error al cargar los datos', 'error');
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      const getInitialProducts = () => [
+        // Farmacia - Problemas Digestivos
+        { id: '1-1', nombre: 'Sal de Fruta ENO', descripcion: 'Alivio de la acidez y la indigestión.', precio: 20.00, stock: 35, categoria: 'farmacia', subcategoria: 'problemas_digestivos', marca: 'ENO', imagen: 'https://images.unsplash.com/photo-1628126084042-df7a6b5d9247?q=80&w=200' },
+        { id: '1-2', nombre: 'Buscapina Forte', descripcion: 'Espasmolítico para el dolor abdominal.', precio: 45.00, stock: 12, categoria: 'farmacia', subcategoria: 'problemas_digestivos', marca: 'Boehringer Ingelheim', imagen: 'https://images.unsplash.com/photo-1596462502278-27bfad6d2c61?q=80&w=200' },
+        { id: '1-3', nombre: 'Omeprazol 20mg', descripcion: 'Inhibidor de la bomba de protones para la acidez estomacal y el reflujo.', precio: 38.50, stock: 0, categoria: 'farmacia', subcategoria: 'problemas_digestivos', marca: 'Prilosec', imagen: 'imagenes/ome20.jpg' },
+        { id: '1-4', nombre: 'Pepsamar', descripcion: 'Antiácido y protector gástrico para aliviar la gastritis.', precio: 28.50, stock: 8, categoria: 'farmacia', subcategoria: 'problemas_digestivos', marca: 'Amsa', imagen: 'https://images.unsplash.com/photo-1579201582236-47b2c01991d0?q=80&w=200' },
+        { id: '1-5', nombre: 'Enterogermina', descripcion: 'Probiótico para restaurar el equilibrio de la flora intestinal.', precio: 55.00, stock: 2, categoria: 'farmacia', subcategoria: 'problemas_digestivos', marca: 'Sanofi', imagen: 'https://images.unsplash.com/photo-1574717025983-4f96c3427f7a?q=80&w=200' },
+
+        // Farmacia - Material de Curación
+        { id: '2-1', nombre: 'Vendas Elásticas Adhesivas', descripcion: 'Paquete de 10 vendas elásticas, flexibles y resistentes al agua.', precio: 20.00, stock: 30, categoria: 'farmacia', subcategoria: 'material_curacion', marca: 'Band-Aid', imagen: 'https://images.unsplash.com/photo-1601614792690-e2b20f4c3c3a?q=80&w=200' },
+        { id: '2-2', nombre: 'Alcohol Isopropílico', descripcion: 'Alcohol desinfectante para uso general en curaciones.', precio: 15.00, stock: 45, categoria: 'farmacia', subcategoria: 'material_curacion', marca: 'Genérico', imagen: 'https://images.unsplash.com/photo-1616075902120-7f287e07672d?q=80&w=200' },
+        { id: '2-3', nombre: 'Curitas Band-Aid', descripcion: 'Cajas de 100 curitas adhesivas para pequeñas heridas.', precio: 12.00, stock: 50, categoria: 'farmacia', subcategoria: 'material_curacion', marca: 'Band-Aid', imagen: 'https://images.unsplash.com/photo-1588720182607-b25055b1b46a?q=80&w=200' },
+        { id: '2-4', nombre: 'Gasas Estériles', descripcion: 'Paquete de 10 gasas estériles de 10x10 cm.', precio: 8.00, stock: 60, categoria: 'farmacia', subcategoria: 'material_curacion', marca: 'Genérico', imagen: 'https://images.unsplash.com/photo-1579201582236-47b2c01991d0?q=80&w=200' },
+
+        // Farmacia - Productos Covid
+        { id: '3-1', nombre: 'Mascarillas KN95', descripcion: 'Mascarillas de protección certificadas.', precio: 5.00, stock: 100, categoria: 'farmacia', subcategoria: 'productos_covid', marca: 'Certificada', imagen: 'https://images.unsplash.com/photo-1584286196231-152e00e00867?q=80&w=200' },
+        { id: '3-2', nombre: 'Oxímetro de Pulso', descripcion: 'Mide la saturación de oxígeno en la sangre.', precio: 150.00, stock: 8, categoria: 'farmacia', subcategoria: 'productos_covid', marca: 'Omron', imagen: 'https://images.unsplash.com/photo-1604085871344-93b584e0c4b6?q=80&w=200' },
+        { id: '3-3', nombre: 'Termómetro Digital', descripcion: 'Termómetro de lectura rápida para medir la temperatura corporal.', precio: 75.00, stock: 15, categoria: 'farmacia', subcategoria: 'productos_covid', marca: 'Genérico', imagen: 'https://images.unsplash.com/photo-1596707166138-024225d31215?q=80&w=200' },
+        
+        // Farmacia - Problemas Respiratorios y Gripe
+        { id: '4-1', nombre: 'Salbutamol Inhalador', descripcion: 'Broncodilatador de acción rápida para el alivio de ataques de asma.', precio: 85.00, stock: 8, categoria: 'farmacia', subcategoria: 'problemas_respiratorios', marca: 'Ventolin', imagen: 'imagenes/salbu.jpg' },
+        { id: '4-2', nombre: 'Tabletas Virogrip', descripcion: 'Alivia los síntomas de la gripe y el resfriado común.', precio: 28.00, stock: 22, categoria: 'farmacia', subcategoria: 'problemas_respiratorios', marca: 'Virogrip', imagen: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=200' },
+
+        // Farmacia - Vitaminas y Suplementos
+        { id: '5-1', nombre: 'Vitamina C 1000mg', descripcion: 'Suplemento de Vitamina C para reforzar el sistema inmunológico.', precio: 35.00, stock: 40, categoria: 'farmacia', subcategoria: 'vitaminas_suplementos', marca: 'Bayer', imagen: 'https://images.unsplash.com/photo-1594916893693-54f30500732e?q=80&w=200' },
+        { id: '5-2', nombre: 'Complejo B', descripcion: 'Suplemento con Vitaminas del complejo B para la energía y el metabolismo.', precio: 25.00, stock: 15, categoria: 'farmacia', subcategoria: 'vitaminas_suplementos', marca: 'Genérico', imagen: 'https://images.unsplash.com/photo-1574717025983-4f96c3427f7a?q=80&w=200' },
+        
+        // Farmacia - Alivio del Dolor
+        { id: '6-1', nombre: 'Ibuprofeno 400mg', descripcion: 'Antiinflamatorio no esteroideo para el dolor de cabeza, muscular y menstrual.', precio: 25.00, stock: 12, categoria: 'farmacia', subcategoria: 'alivio_dolor', marca: 'Advil', imagen: 'imagenes/ibu400.jpg' },
+        { id: '6-2', nombre: 'Diclofenaco Gel 50g', descripcion: 'Gel antiinflamatorio tópico para el dolor muscular y articular.', precio: 40.00, stock: 30, categoria: 'farmacia', subcategoria: 'alivio_dolor', marca: 'Voltaren', imagen: 'imagenes/diclo50.jpg' },
+        
+        // Cosmética y Belleza
+        { id: '7-1', nombre: 'Crema Facial Anti-Edad', descripcion: 'Crema facial con ácido hialurónico y retinol para reducir arrugas y líneas de expresión.', precio: 150.00, stock: 10, categoria: 'cosmetica', marca: 'L\'Oréal', imagen: 'https://images.unsplash.com/photo-1570172619665-f481a5a07d6a?q=80&w=200' },
+        { id: '7-2', nombre: 'Protector Solar Facial FPS 50+', descripcion: 'Protector solar de amplio espectro, resistente al agua y con acabado mate.', precio: 85.00, stock: 15, categoria: 'cosmetica', marca: 'La Roche Posay', imagen: 'https://images.unsplash.com/photo-1628126084042-df7a6b5d9247?q=80&w=200' },
+        
+        // Mamá y Bebé - Pañales y Toallas húmedas
+        { id: '8-1', nombre: 'Pañales Desechables Talla G', descripcion: 'Pañales ultra absorbentes para bebés de 9-14 kg, con indicador de humedad.', precio: 120.00, stock: 8, categoria: 'mama_bebe', subcategoria: 'panales_toallas', marca: 'Pampers', imagen: 'https://images.unsplash.com/photo-1597576558838-8921867e3355?q=80&w=200' },
+        { id: '8-2', nombre: 'Toallitas Húmedas Bebé Feliz', descripcion: 'Toallitas suaves y resistentes para la limpieza delicada de la piel del bebé.', precio: 35.00, stock: 15, categoria: 'mama_bebe', subcategoria: 'panales_toallas', marca: 'Bebé Feliz', imagen: 'imagenes/toallitas.jpg' },
+        
+        // Mamá y Bebé - Alimentos para bebés
+        { id: '9-1', nombre: 'Leche Infantil NAN 1', descripcion: 'Fórmula infantil completa para bebés desde el nacimiento hasta los 6 meses.', precio: 105.00, stock: 5, categoria: 'mama_bebe', subcategoria: 'alimentos_bebes', marca: 'Nestlé', imagen: 'https://images.unsplash.com/photo-1582270912389-72f1262d2948?q=80&w=200' },
+        
+        // Cuidado Personal - Cuidado Capilar
+        { id: '10-1', nombre: 'Shampoo Anticaspa', descripcion: 'Combate la caspa y previene su reaparición, dejando el cabello limpio y fresco.', precio: 45.00, stock: 14, categoria: 'cuidado_personal', subcategoria: 'cuidado_capilar', marca: 'Head & Shoulders', imagen: 'imagenes/shampoo.jpg' },
+        { id: '10-2', nombre: 'Acondicionador Reparador', descripcion: 'Acondicionador para cabello dañado con queratina y aceite de argán.', precio: 50.00, stock: 12, categoria: 'cuidado_personal', subcategoria: 'cuidado_capilar', marca: 'TRESemmé', imagen: 'https://images.unsplash.com/photo-1590382346765-b1a64c4897f5?q=80&w=200' },
+        
+        // Cuidado Personal - Cuidado Femenino
+        { id: '11-1', nombre: 'Toallas Sanitarias Nosotras', descripcion: 'Protección diaria y discreta con alas.', precio: 22.00, stock: 30, categoria: 'cuidado_personal', subcategoria: 'cuidado_femenino', marca: 'Nosotras', imagen: 'https://images.unsplash.com/photo-1579483084343-424a2512f43d?q=80&w=200' },
+        
+        // Hogar
+        { id: '12-1', nombre: 'Desinfectante Multiusos', descripcion: 'Elimina el 99.9% de gérmenes y bacterias de todas las superficies.', precio: 28.00, stock: 25, categoria: 'hogar', marca: 'Lysol', imagen: 'https://images.unsplash.com/photo-1588720182607-b25055b1b46a?q=80&w=200' },
+        { id: '12-2', nombre: 'Papel Higiénico Scott', descripcion: 'Paquete de 12 rollos de papel higiénico ultra suave.', precio: 65.00, stock: 10, categoria: 'hogar', marca: 'Scott', imagen: 'https://images.unsplash.com/photo-1629854743472-a7d5b1f86f8c?q=80&w=200' },
+      ];
+
+      // Funciones del carrito
+      const addToCart = (product) => {
+        if (product.stock === 0) {
+          addToast('Producto sin stock', 'warning');
+          return;
+        }
+        
+        setCart(prev => {
+          const existing = prev.find(item => item.id === product.id);
+          if (existing) {
+            if (existing.cant >= product.stock) {
+              addToast(`Solo hay ${product.stock} unidades disponibles`, 'warning');
+              return prev;
+            }
+            return prev.map(item =>
+              item.id === product.id
+                ? { ...item, cant: item.cant + 1 }
+                : item
+            );
+          } else {
+            return [...prev, { ...product, cant: 1 }];
+          }
+        });
+        addToast(`${product.nombre} añadido al carrito`, 'success', 2000);
+      };
+
+      const removeFromCart = (productId) => {
+        setCart(prev => prev.filter(item => item.id !== productId));
+        addToast('Producto eliminado del carrito', 'info');
+      };
+
+      const updateCartQuantity = (productId, newQuantity) => {
+        if (newQuantity <= 0) {
+          removeFromCart(productId);
+          return;
+        }
+        setCart(prev =>
+          prev.map(item =>
+            item.id === productId
+              ? { ...item, cant: newQuantity }
+              : item
+          )
+        );
+      };
+
+      const clearCart = () => {
+        setCart([]);
+      };
+
+      // Sistema de pedidos mejorado
+      const placeOrder = (items, total, cliente, extra = {}) => {
+        try {
+          const order = {
+            id: Utils.generateId(),
+            invoiceNumber: extra.invoiceNumber || null,
+            timestamp: Date.now(),
+            items: items.map(i => ({
+              id: i.id,
+              nombre: i.nombre,
+              marca: i.marca || '',
+              precio: i.precio,
+              cantidad: i.cantidad || i.cant,
+              imagen: i.imagen || ''
+            })),
+            total,
+            cliente: {
+              nombre: cliente.nombre || '',
+              telefono: cliente.telefono || '',
+              ci: cliente.ci || '',
+              direccion: cliente.direccion || ''
+            },
+            status: extra.type === 'pos' ? CONSTANTS.ORDER_STATUSES.POS : CONSTANTS.ORDER_STATUSES.PENDIENTE,
+            paymentMethod: extra.paymentMethod || null,
+            amountReceived: extra.amountReceived || null,
+            changeAmount: extra.changeAmount || null
+          };
+          
+          const updated = [order, ...orders];
+          setOrders(updated);
+          
+          // Actualizar stock de productos
+          const updatedProducts = products.map(product => {
+            const orderItem = items.find(item => item.id === product.id);
+            if (orderItem) {
+              return { ...product, stock: product.stock - (orderItem.cantidad || orderItem.cant) };
+            }
+            return product;
+          });
+          setProducts(updatedProducts);
+          
+          return order;
+        } catch (e) {
+          console.error('Error creando pedido', e);
+          addToast('No se pudo registrar el pedido', 'error');
+          return null;
+        }
+      };
+
+      const updateOrderStatus = (orderId, status) => {
+        const updated = orders.map(o => 
+          o.id === orderId ? { ...o, status, lastUpdate: Date.now() } : o
+        );
+        setOrders(updated);
+        
+        const statusLabels = {
+          [CONSTANTS.ORDER_STATUSES.PENDIENTE]: 'pendiente',
+          [CONSTANTS.ORDER_STATUSES.CONFIRMADO]: 'confirmado',
+          [CONSTANTS.ORDER_STATUSES.COMPLETADO]: 'completado'
+        };
+        
+        addToast(`Pedido actualizado a ${statusLabels[status]}`, 'success');
+      };
+      
+      const deleteOrder = (orderId) => {
+        const updatedOrders = orders.filter(o => o.id !== orderId);
+        setOrders(updatedOrders);
+      };
+
+      // Gestión de productos
+      const addProduct = (product) => {
+        const newProduct = { ...product, id: Utils.generateId() };
+        const updatedProducts = [...products, newProduct];
+        setProducts(updatedProducts);
+        addToast('Producto agregado exitosamente', 'success');
+      };
+
+      const updateProduct = (updatedProduct) => {
+        const updatedProducts = products.map(p =>
+          p.id === updatedProduct.id ? updatedProduct : p
+        );
+        setProducts(updatedProducts);
+        addToast('Producto actualizado exitosamente', 'success');
+      };
+
+      const deleteProduct = (productId) => {
+        const updatedProducts = products.filter(p => p.id !== productId);
+        setProducts(updatedProducts);
+        addToast('Producto eliminado', 'success');
+      };
+
+      // Valores calculados
+      const cartTotal = useMemo(() => {
+        return cart.reduce((sum, item) => sum + (item.precio * item.cant), 0);
+      }, [cart]);
+
+      const cartCount = useMemo(() => {
+        return cart.reduce((sum, item) => sum + item.cant, 0);
+      }, [cart]);
+
+      const stockAnalysis = useMemo(() => {
+        const outOfStock = products.filter(p => p.stock === 0);
+        const lowStock = products.filter(p => p.stock > 0 && p.stock <= CONSTANTS.LOW_STOCK_THRESHOLD);
+        const criticalStock = products.filter(p => p.stock > 0 && p.stock <= CONSTANTS.CRITICAL_STOCK_THRESHOLD);
+        return { outOfStock, lowStock, criticalStock };
+      }, [products]);
+
+      const value = {
+        // Estado
+        products, cart, orders, currentView, isAdminMode, isPOSMode, loading, toasts,
+        cartTotal, cartCount, stockAnalysis,
+        
+        // Acciones
+        setCurrentView, setIsAdminMode, setIsPOSMode, addToCart, removeFromCart, updateCartQuantity, clearCart,
+        addProduct, updateProduct, deleteProduct, addToast, removeToast, placeOrder, updateOrderStatus, deleteOrder
+      };
+
+      return (
+        <AppContext.Provider value={value}>
+          {children}
+        </AppContext.Provider>
+      );
+    };
+
+    // ==================== VISTA PRINCIPAL ADMIN MEJORADA ====================
+    const AdminView = () => {
+      const { products, orders, stockAnalysis } = useContext(AppContext);
+      const [activeTab, setActiveTab] = useState('dashboard');
+
+      const stats = useMemo(() => ({
+        totalProducts: products.length,
+        totalOrders: orders.length,
+        lowStockCount: stockAnalysis.lowStock.length,
+        outOfStockCount: stockAnalysis.outOfStock.length,
+        totalValue: products.reduce((sum, p) => sum + (p.precio * p.stock), 0),
+        totalSales: orders.reduce((sum, o) => sum + o.total, 0),
+        posOrders: orders.filter(o => o.status === CONSTANTS.ORDER_STATUSES.POS).length,
+        onlineOrders: orders.filter(o => o.status !== CONSTANTS.ORDER_STATUSES.POS).length
+      }), [products, orders, stockAnalysis]);
+
+      const tabs = [
+        { id: 'dashboard', label: 'Dashboard', icon: 'tachometer-alt', component: AdminDashboard },
+        { id: 'inventory', label: 'Inventario', icon: 'warehouse', component: InventoryManagementView },
+        { id: 'orders', label: 'Pedidos', icon: 'shopping-cart', component: OrderManagementView },
+        { id: 'reports', label: 'Reportes', icon: 'chart-bar', component: ReportsView }
+      ];
+
+      const ActiveComponent = tabs.find(tab => tab.id === activeTab)?.component;
+
+      return (
+        <div className="min-h-screen pt-20">
+          <div className="admin-indicator">
+            <i className="fas fa-user-shield mr-2"></i>
+            Modo Administración
+          </div>
+          
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Panel de Administración</h1>
+                <p className="text-slate-400">Gestión completa de la farmacia</p>
+              </div>
+              
+              <div className="flex items-center gap-4 mt-4 md:mt-0">
+                <div className="text-right text-sm">
+                  <div className="text-slate-400">Ventas Totales:</div>
+                  <div className="font-bold text-green-400">{Utils.formatCurrency(stats.totalSales)}</div>
+                </div>
+                <div className="text-right text-sm">
+                  <div className="text-slate-400">Productos:</div>
+                  <div className="font-bold">{stats.totalProducts}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-2 mb-8">
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-green-500 text-white shadow-lg'
+                      : 'bg-slate-700/80 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  <i className={`fas fa-${tab.icon} mr-2`}></i>
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            
+            {ActiveComponent && <ActiveComponent stats={stats} stockAnalysis={stockAnalysis} />}
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== DASHBOARD ADMINISTRATIVO MEJORADO ====================
+    const AdminDashboard = ({ stats, stockAnalysis }) => {
+      const chartRef = useRef(null);
+      const chartInstance = useRef(null);
+
+      useEffect(() => {
+        if (chartInstance.current) {
+          chartInstance.current.destroy();
+        }
+
+        const ctx = chartRef.current.getContext('2d');
+        chartInstance.current = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Total Ventas', 'Pedidos Online', 'Ventas POS', 'Productos', 'Stock Bajo', 'Sin Stock'],
+            datasets: [{
+              label: 'Resumen del Negocio',
+              data: [stats.totalSales, stats.onlineOrders, stats.posOrders, stats.totalProducts, stats.lowStockCount, stats.outOfStockCount],
+              backgroundColor: [
+                'rgba(34, 197, 94, 0.8)',
+                'rgba(59, 130, 246, 0.8)',
+                'rgba(168, 85, 247, 0.8)',
+                'rgba(245, 158, 11, 0.8)',
+                'rgba(251, 191, 36, 0.8)',
+                'rgba(239, 68, 68, 0.8)'
+              ],
+              borderColor: [
+                'rgba(34, 197, 94, 1)',
+                'rgba(59, 130, 246, 1)',
+                'rgba(168, 85, 247, 1)',
+                'rgba(245, 158, 11, 1)',
+                'rgba(251, 191, 36, 1)',
+                'rgba(239, 68, 68, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: '#ccc'
+                },
+                grid: {
+                  color: 'rgba(255, 255, 255, 0.1)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: '#ccc'
+                },
+                grid: {
+                  color: 'rgba(255, 255, 255, 0.1)'
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Resumen de Ventas e Inventario',
+                color: '#fff',
+                font: {
+                  size: 18
+                }
+              }
+            }
+          }
+        });
+
+        return () => {
+          if (chartInstance.current) {
+            chartInstance.current.destroy();
+          }
+        };
+      }, [stats]);
+
+      return (
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="glass-card p-6 rounded-2xl text-center">
+              <i className="fas fa-dollar-sign text-4xl text-green-400 mb-3"></i>
+              <p className="text-xl font-bold">{Utils.formatCurrency(stats.totalSales)}</p>
+              <p className="text-sm text-slate-400">Ventas Totales</p>
+            </div>
+            <div className="glass-card p-6 rounded-2xl text-center">
+              <i className="fas fa-shopping-cart text-4xl text-blue-400 mb-3"></i>
+              <p className="text-xl font-bold">{stats.totalOrders}</p>
+              <p className="text-sm text-slate-400">Pedidos y Ventas</p>
+            </div>
+            <div className="glass-card p-6 rounded-2xl text-center">
+              <i className="fas fa-warehouse text-4xl text-purple-400 mb-3"></i>
+              <p className="text-xl font-bold">{stats.totalProducts}</p>
+              <p className="text-sm text-slate-400">Total de Productos</p>
+            </div>
+            <div className="glass-card p-6 rounded-2xl text-center">
+              <i className="fas fa-exclamation-triangle text-4xl text-yellow-400 mb-3"></i>
+              <p className="text-xl font-bold">{stockAnalysis.lowStock.length}</p>
+              <p className="text-sm text-slate-400">Productos con Poco Stock</p>
+            </div>
+          </div>
+
+          <div className="glass-card p-6 rounded-2xl">
+            <div className="h-96">
+              <canvas ref={chartRef}></canvas>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== VISTA DE REPORTES ====================
+    const ReportsView = () => {
+      const { orders } = useContext(AppContext);
+      const [filterRange, setFilterRange] = useState('all');
+      const [startDate, setStartDate] = useState('');
+      const [endDate, setEndDate] = useState('');
+      
+      const filteredOrders = useMemo(() => {
+        let filtered = orders;
+        if (filterRange !== 'all') {
+          const now = new Date();
+          const oneDay = 24 * 60 * 60 * 1000;
+          let filterDate;
+          switch (filterRange) {
+            case 'today':
+              filterDate = now.setHours(0, 0, 0, 0);
+              filtered = filtered.filter(o => o.timestamp >= filterDate);
+              break;
+            case 'last7days':
+              filterDate = now.setDate(now.getDate() - 7);
+              filtered = filtered.filter(o => o.timestamp >= filterDate);
+              break;
+            case 'last30days':
+              filterDate = now.setDate(now.getDate() - 30);
+              filtered = filtered.filter(o => o.timestamp >= filterDate);
+              break;
+            case 'thismonth':
+              filterDate = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+              filtered = filtered.filter(o => o.timestamp >= filterDate);
+              break;
+            default:
+              break;
+          }
+        }
+        if (startDate && endDate) {
+          const start = new Date(startDate).setHours(0, 0, 0, 0);
+          const end = new Date(endDate).setHours(23, 59, 59, 999);
+          filtered = filtered.filter(o => o.timestamp >= start && o.timestamp <= end);
+        }
+        return filtered.sort((a, b) => b.timestamp - a.timestamp);
+      }, [orders, filterRange, startDate, endDate]);
+
+      const totalSales = useMemo(() => filteredOrders.reduce((sum, order) => sum + order.total, 0), [filteredOrders]);
+
+      const handleExportPDF = () => {
+        const reportElement = document.getElementById('report-to-print');
+        const options = {
+          margin: 0.5,
+          filename: `reporte-ventas-${Utils.formatDate(new Date(), false)}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(options).from(reportElement).save();
+        addToast('Reporte PDF exportado', 'success');
+      };
+      
+      return (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-bold mb-4">Reportes de Ventas</h2>
+          
+          <div className="glass-card p-6 rounded-2xl">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+              <h3 className="font-bold">Filtros</h3>
+              <div className="flex flex-wrap gap-2">
+                <button 
+                  onClick={() => setFilterRange('today')} 
+                  className={`btn-secondary text-sm ${filterRange === 'today' ? 'bg-slate-700' : ''}`}
+                >Hoy</button>
+                <button 
+                  onClick={() => setFilterRange('last7days')} 
+                  className={`btn-secondary text-sm ${filterRange === 'last7days' ? 'bg-slate-700' : ''}`}
+                >Últimos 7 días</button>
+                <button 
+                  onClick={() => setFilterRange('last30days')} 
+                  className={`btn-secondary text-sm ${filterRange === 'last30days' ? 'bg-slate-700' : ''}`}
+                >Últimos 30 días</button>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="form-input text-sm" />
+              <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="form-input text-sm" />
+              <button onClick={() => { setFilterRange('custom'); }} className="btn-primary">Aplicar Filtro</button>
+            </div>
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <div className="text-xl font-bold">
+              Total Ventas: <span className="text-green-400">{Utils.formatCurrency(totalSales)}</span>
+            </div>
+            <button onClick={handleExportPDF} className="btn-primary">
+              <i className="fas fa-file-pdf mr-2"></i>
+              Exportar a PDF
+            </button>
+          </div>
+          
+          <div className="glass-card p-6 rounded-2xl overflow-hidden" id="report-to-print">
+            <h3 className="text-xl font-bold mb-4 text-white print:text-black">Reporte de Ventas</h3>
+            <div className="overflow-x-auto">
+              <table className="table-professional w-full">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Número</th>
+                    <th>Tipo</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredOrders.length > 0 ? filteredOrders.map(order => (
+                    <tr key={order.id}>
+                      <td className="text-sm">{Utils.formatDate(order.timestamp)}</td>
+                      <td className="font-mono text-sm">#{order.invoiceNumber || order.id.slice(-8)}</td>
+                      <td>
+                        <span className={`status-badge ${order.status === 'pos' ? 'status-pos' : 'status-confirmado'}`}>
+                          {order.status === 'pos' ? 'POS' : 'Online'}
+                        </span>
+                      </td>
+                      <td>{order.cliente?.nombre || 'N/A'}</td>
+                      <td className="font-bold text-green-400">{Utils.formatCurrency(order.total)}</td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td colSpan="5" className="text-center p-8 text-slate-400">No hay datos de ventas para este período.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== CATÁLOGO MEJORADO ====================
+    const CatalogView = () => {
+      const { products, loading, addToCart, setCurrentView } = useContext(AppContext);
+      const [filterCategory, setFilterCategory] = useState('all');
+      const [filterSubcategory, setFilterSubcategory] = useState('all');
+      const [searchTerm, setSearchTerm] = useState('');
+
+      const mainCategories = useMemo(() => CONSTANTS.CATEGORIES, []);
+      const subcategories = useMemo(() => {
+        const category = mainCategories.find(c => c.value === filterCategory);
+        return category?.subcategories || [];
+      }, [filterCategory, mainCategories]);
+
+      const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+          const matchesCategory = filterCategory === 'all' || product.categoria === filterCategory;
+          const matchesSubcategory = filterSubcategory === 'all' || product.subcategoria === filterSubcategory;
+          const matchesSearch = product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                product.marca.toLowerCase().includes(searchTerm.toLowerCase());
+          return matchesCategory && matchesSubcategory && matchesSearch;
+        }).sort((a, b) => a.nombre.localeCompare(b.nombre));
+      }, [products, filterCategory, filterSubcategory, searchTerm]);
+      
+      const carouselImages = [
+        'https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1920',
+        'https://images.unsplash.com/photo-1596462502278-27bfad6d2c61?q=80&w=1920',
+        'https://images.unsplash.com/photo-1579483084343-424a2512f43d?q=80&w=1920',
+        'https://images.unsplash.com/photo-1590382346765-b1a64c4897f5?q=80&w=1920',
+        'https://images.unsplash.com/photo-1616075902120-7f287e07672d?q=80&w=1920',
+      ];
+      const [currentSlide, setCurrentSlide] = useState(0);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentSlide(prev => (prev + 1) % carouselImages.length);
+        }, 5000);
+        return () => clearInterval(interval);
+      }, [carouselImages.length]);
+
+      if (loading) {
+        return (
+          <div className="loading-overlay">
+            <div className="loading-content">
+              <LoadingSpinner size="xl" />
+              <h2 className="text-2xl font-bold mt-4 mb-2">Farmacia Virgen de los Remedios</h2>
+              <p className="text-slate-400">Cargando sistema profesional...</p>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="fade-in">
+          <header className="hero-bg text-white py-24 text-center relative">
+            <div className="container mx-auto px-4 relative z-10">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 slide-in-left">
+                Farmacia Virgen de los Remedios
+              </h1>
+              <p className="text-xl md:text-2xl text-green-100 max-w-3xl mx-auto mb-8 slide-in-right">
+                Tu salud es nuestra prioridad. Encuentra todo lo que necesitas con la calidad y confianza que mereces.
+              </p>
+            </div>
+          </header>
+
+          <main className="container mx-auto px-4 py-12">
+            {/* Carrusel de Banners */}
+            <div className="carousel-container mb-12">
+              <div 
+                className="carousel-track" 
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {carouselImages.map((src, index) => (
+                  <div key={index} className="carousel-slide">
+                    <img 
+                      src={src} 
+                      alt={`Banner ${index + 1}`} 
+                      className="w-full h-72 md:h-96 object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-6 mb-8">
+              <div className="relative w-full md:w-1/3">
+                <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Buscar productos..."
+                  className="w-full pl-12 form-input"
+                />
+              </div>
+              <div className="w-full md:w-2/3 flex flex-wrap justify-center md:justify-end gap-2">
+                {mainCategories.map(category => (
+                  <button
+                    key={category.value}
+                    onClick={() => {
+                      setFilterCategory(category.value);
+                      setFilterSubcategory('all');
+                    }}
+                    className={`px-4 py-2 rounded-full font-medium transition-colors ${
+                      filterCategory === category.value
+                        ? 'bg-green-500 text-white shadow-lg'
+                        : 'bg-slate-700/80 text-slate-300 hover:bg-slate-600'
+                    }`}
+                  >
+                    {category.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {subcategories.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                <button
+                  onClick={() => setFilterSubcategory('all')}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    filterSubcategory === 'all'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  Todas las subcategorías
+                </button>
+                {subcategories.map(subcat => (
+                  <button
+                    key={subcat.value}
+                    onClick={() => setFilterSubcategory(subcat.value)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      filterSubcategory === subcat.value
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                    }`}
+                  >
+                    {subcat.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              {filteredProducts.length > 0 ? filteredProducts.map(product => (
+                <div key={product.id} className="glass-card product-card p-4 rounded-xl text-center">
+                  <img
+                    src={product.imagen}
+                    alt={product.nombre}
+                    className="w-full h-40 object-cover rounded-lg mb-3"
+                    onError={(e) => {
+                      e.target.src = 'https://placehold.co/200x200?text=Sin+Imagen';
+                    }}
+                  />
+                  <h3 className="font-bold mb-1 line-clamp-2">{product.nombre}</h3>
+                  <p className="text-sm text-slate-400 mb-2">{product.marca}</p>
+                  <p className="text-xl font-bold text-green-400 mb-3">{Utils.formatCurrency(product.precio)}</p>
+                  
+                  {product.stock > 0 ? (
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="btn-primary w-full text-sm py-2"
+                    >
+                      <i className="fas fa-cart-plus mr-2"></i>
+                      Añadir al Carrito
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full bg-red-600 text-white font-semibold py-2 rounded-lg opacity-50 cursor-not-allowed text-sm"
+                    >
+                      <i className="fas fa-exclamation-circle mr-2"></i>
+                      Sin Stock
+                    </button>
+                  )}
+                </div>
+              )) : (
+                <div className="col-span-full text-center py-12">
+                  <i className="fas fa-box-open text-6xl text-slate-500 mb-4"></i>
+                  <p className="text-xl text-slate-300">No se encontraron productos.</p>
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
+      );
+    };
+
+    // ==================== APLICACIÓN PRINCIPAL ====================
+    const App = () => {
+      const { currentView, toasts, removeToast, loading } = useContext(AppContext);
+      const invoiceDataRef = useRef(null);
+
+      if (loading) {
+        return (
+          <div className="loading-overlay">
+            <div className="loading-content">
+              <LoadingSpinner size="xl" />
+              <h2 className="text-2xl font-bold mt-4 mb-2">Farmacia Virgen de los Remedios</h2>
+              <p className="text-slate-400">Cargando sistema profesional...</p>
+            </div>
+          </div>
+        );
+      }
+
+      const renderView = () => {
+        switch (currentView) {
+          case 'catalog':
+            return <CatalogView />;
+          case 'cart':
+            return <CartView />;
+          case 'pos':
+            return <POSView />;
+          case 'admin':
+            return <AdminView />;
+          case 'login':
+            return <LoginView />;
+          default:
+            return <CatalogView />;
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-900 text-white">
+          <Navbar />
+          <ToastContainer toasts={toasts} removeToast={removeToast} />
+          {renderView()}
+        </div>
+      );
+    };
+
+    // ==================== LOGIN MEJORADO ====================
+    const LoginView = () => {
+      const { setCurrentView, setIsAdminMode, addToast } = useContext(AppContext);
+      const [credentials, setCredentials] = useState({ username: '', password: '' });
+      const [loading, setLoading] = useState(false);
+      const [showPassword, setShowPassword] = useState(false);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        if (credentials.username === CONSTANTS.ADMIN_CREDENTIALS.username && 
+            credentials.password === CONSTANTS.ADMIN_CREDENTIALS.password) {
+          setIsAdminMode(true);
+          setCurrentView('admin');
+          addToast('¡Bienvenido al panel de administración!', 'success');
+        } else {
+          addToast('Credenciales incorrectas. Verifica usuario y contraseña.', 'error');
+        }
+        setLoading(false);
+      };
+
+      return (
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <div className="w-full max-w-md">
+            <div className="glass-card p-8 rounded-2xl fade-in">
+              <div className="text-center mb-8">
+                <div className="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i className="fas fa-user-shield text-3xl text-white"></i>
+                </div>
+                <h1 className="text-3xl font-bold mb-2">Acceso Administrativo</h1>
+                <p className="text-slate-400">Sistema de gestión integral</p>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <i className="fas fa-user mr-2 text-slate-400"></i>
+                    Usuario
+                  </label>
+                  <input
+                    type="text"
+                    value={credentials.username}
+                    onChange={(e) => setCredentials(prev => ({...prev, username: e.target.value}))}
+                    className="w-full form-input"
+                    placeholder="Ingrese su usuario"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    <i className="fas fa-lock mr-2 text-slate-400"></i>
+                    Contraseña
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={credentials.password}
+                      onChange={(e) => setCredentials(prev => ({...prev, password: e.target.value}))}
+                      className="w-full form-input pr-12"
+                      placeholder="Ingrese su contraseña"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                    >
+                      <i className={`fas fa-${showPassword ? 'eye-slash' : 'eye'}`}></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full btn-primary disabled:opacity-50 text-lg py-4"
+                >
+                  {loading ? (
+                    <>
+                      <LoadingSpinner size="sm" />
+                      <span className="ml-2">Verificando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-sign-in-alt mr-2"></i>
+                      Iniciar Sesión
+                    </>
+                  )}
+                </button>
+              </form>
+              
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setCurrentView('catalog')}
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
+                >
+                  <i className="fas fa-arrow-left mr-2"></i>
+                  Volver al catálogo
+                </button>
+              </div>
+              
+              <div className="mt-6 p-4 bg-slate-800/50 rounded-lg">
+                <p className="text-xs text-center text-slate-400 mb-2">Credenciales de demostración:</p>
+                <div className="text-xs text-center space-y-1">
+                  <p><span className="text-slate-300">Usuario:</span> <code className="bg-slate-700 px-2 py-1 rounded">niki</code></p>
+                  <p><span className="text-slate-300">Contraseña:</span> <code className="bg-slate-700 px-2 py-1 rounded">1234</code></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ==================== INICIALIZACIÓN ====================
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </React.StrictMode>
+    );
+  </script>
+</body>
+</html>
